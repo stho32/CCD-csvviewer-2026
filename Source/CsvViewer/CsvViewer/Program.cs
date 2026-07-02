@@ -1,4 +1,5 @@
 using CsvViewer.BL.CommandLineArguments;
+using CsvViewer.BL.Common;
 using CsvViewer.BL.Logging;
 
 namespace CsvViewer;
@@ -7,11 +8,15 @@ public class Program
 {
     public static int Main(string[] args)
     {
-        var options = CommandLineArgumentsParser.Parse(args);
-        if (options is null)
-            return 1;
-
         ILogger logger = new ConsoleLogger();
+
+        Result<CommandLineOptions> optionsResult = CommandLineArgumentsParser.Parse(args);
+        if (!optionsResult.IsSuccess)
+        {
+            logger.Error(optionsResult.Message);
+            return 1;
+        }
+
         logger.Info("CsvViewer gestartet.");
 
         // Anwendungslogik folgt hier (CSV lesen und anzeigen).
