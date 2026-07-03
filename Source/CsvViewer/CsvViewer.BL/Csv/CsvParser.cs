@@ -20,25 +20,25 @@ public static class CsvParser
                 null, false, "Die CSV-Eingabe ist leer.");
         }
 
-        string[] header = lines[0].Split(Delimiter);
+        var header = new CsvHeader(lines[0].Split(Delimiter));
 
-        var rows = new List<IReadOnlyList<string>>(lines.Count - 1);
+        var rows = new List<CsvRow>(lines.Count - 1);
         for (int i = 1; i < lines.Count; i++)
         {
             string[] fields = lines[i].Split(Delimiter);
-            if (fields.Length != header.Length)
+            if (fields.Length != header.ColumnCount)
             {
                 return new Result<CsvDocument>(
                     null,
                     false,
-                    $"Zeile {i + 1} hat {fields.Length} Feld(er), erwartet wurden {header.Length} " +
+                    $"Zeile {i + 1} hat {fields.Length} Feld(er), erwartet wurden {header.ColumnCount} " +
                     "gemäß Kopfzeile.");
             }
 
-            rows.Add(fields);
+            rows.Add(new CsvRow(fields));
         }
 
-        var document = new CsvDocument(header, rows);
+        var document = new CsvDocument(header, new CsvRowCollection(rows));
         return new Result<CsvDocument>(document, true, string.Empty);
     }
 }

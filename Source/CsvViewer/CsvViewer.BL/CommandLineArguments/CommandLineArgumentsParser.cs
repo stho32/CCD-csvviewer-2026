@@ -5,10 +5,8 @@ using CsvViewer.BL.Common;
 namespace CsvViewer.BL.CommandLineArguments;
 
 /// <summary>
-/// Operation nach IODA: wandelt rohe Kommandozeilen-Argumente in
-/// <see cref="CommandLineOptions"/> um. Schreibt selbst nichts auf die Konsole —
-/// Hilfe- und Fehlertexte werden als Fehler-<see cref="Result{T}"/> zurückgegeben,
-/// die Ausgabe entscheidet der Entry Point.
+/// Wandelt Kommandozeilen-Argumente in <see cref="CommandLineOptions"/> um.
+/// Schreibt nichts auf die Konsole — Hilfe-/Fehlertexte kommen als Fehler-Result zurück.
 /// </summary>
 public static class CommandLineArgumentsParser
 {

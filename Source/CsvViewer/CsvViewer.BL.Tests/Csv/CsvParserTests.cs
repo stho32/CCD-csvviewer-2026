@@ -27,11 +27,11 @@ public class CsvParserTests
         // Assert
         Assert.That(result.IsSuccess, Is.True);
         Assert.That(result.Value, Is.Not.Null);
-        Assert.That(result.Value!.Header, Is.EqualTo(new[] { "Vorname", "Nachname", "Alter" }));
-        Assert.That(result.Value.Rows, Has.Count.EqualTo(3));
-        Assert.That(result.Value.Rows[0], Is.EqualTo(new[] { "Anna", "Meier", "30" }));
-        Assert.That(result.Value.Rows[1], Is.EqualTo(new[] { "Ben", "Schmidt", "25" }));
-        Assert.That(result.Value.Rows[2], Is.EqualTo(new[] { "Clara", "Weber", "41" }));
+        AssertHeader(result.Value!.Header, "Vorname", "Nachname", "Alter");
+        Assert.That(result.Value.Rows.RowCount, Is.EqualTo(3));
+        AssertRow(result.Value.Rows[0], "Anna", "Meier", "30");
+        AssertRow(result.Value.Rows[1], "Ben", "Schmidt", "25");
+        AssertRow(result.Value.Rows[2], "Clara", "Weber", "41");
     }
 
     [Test]
@@ -49,7 +49,7 @@ public class CsvParserTests
 
         // Assert — Zugriff rein über Position (Kopfzeilen-Reihenfolge), ohne Fachmodell
         Assert.That(result.IsSuccess, Is.True);
-        IReadOnlyList<string> row = result.Value!.Rows[0];
+        CsvRow row = result.Value!.Rows[0];
         Assert.That(row[0], Is.EqualTo("wert0"));
         Assert.That(row[1], Is.EqualTo("wert1"));
         Assert.That(row[2], Is.EqualTo("wert2"));
@@ -93,8 +93,8 @@ public class CsvParserTests
         // Assert
         Assert.That(result.IsSuccess, Is.True);
         Assert.That(result.Value, Is.Not.Null);
-        Assert.That(result.Value!.Header, Is.EqualTo(new[] { "Vorname", "Nachname", "Alter" }));
-        Assert.That(result.Value.Rows, Is.Empty);
+        AssertHeader(result.Value!.Header, "Vorname", "Nachname", "Alter");
+        Assert.That(result.Value.Rows.RowCount, Is.EqualTo(0));
     }
 
     [Test]
@@ -150,10 +150,7 @@ public class CsvParserTests
 
         // Assert
         Assert.That(result.IsSuccess, Is.True);
-        IReadOnlyList<string> row = result.Value!.Rows[0];
-        Assert.That(row[0], Is.EqualTo("\"zitiert\""));
-        Assert.That(row[1], Is.EqualTo("  Leerraum  "));
-        Assert.That(row[2], Is.EqualTo("pfad\\zu\\datei"));
+        AssertRow(result.Value!.Rows[0], "\"zitiert\"", "  Leerraum  ", "pfad\\zu\\datei");
     }
 
     [Test]
@@ -171,7 +168,26 @@ public class CsvParserTests
 
         // Assert
         Assert.That(result.IsSuccess, Is.True);
-        IReadOnlyList<string> row = result.Value!.Rows[0];
-        Assert.That(row, Is.EqualTo(new[] { "x", "", "z" }));
+        AssertRow(result.Value!.Rows[0], "x", "", "z");
+    }
+
+    private static void AssertHeader(CsvHeader header, params string[] erwarteteSpaltennamen)
+    {
+        Assert.That(header.ColumnCount, Is.EqualTo(erwarteteSpaltennamen.Length));
+        for (int i = 0; i < erwarteteSpaltennamen.Length; i++)
+        {
+            Assert.That(header[i], Is.EqualTo(erwarteteSpaltennamen[i]),
+                $"Spaltenname an Position {i}");
+        }
+    }
+
+    private static void AssertRow(CsvRow row, params string[] erwarteteFelder)
+    {
+        Assert.That(row.FieldCount, Is.EqualTo(erwarteteFelder.Length));
+        for (int i = 0; i < erwarteteFelder.Length; i++)
+        {
+            Assert.That(row[i], Is.EqualTo(erwarteteFelder[i]),
+                $"Feldwert an Position {i}");
+        }
     }
 }
