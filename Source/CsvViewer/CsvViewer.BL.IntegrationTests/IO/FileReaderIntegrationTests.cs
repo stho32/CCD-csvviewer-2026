@@ -4,10 +4,6 @@ using CsvViewer.BL.IO;
 
 namespace CsvViewer.BL.IntegrationTests.IO;
 
-/// <summary>
-/// Integrationstests für <see cref="FileReader"/> gegen echte temporäre Dateien.
-/// Prüft das Zusammenspiel mit dem Dateisystem (UTF-8, Reihenfolge, Fehlerfälle).
-/// </summary>
 public class FileReaderIntegrationTests
 {
     private string _tempDirectory = string.Empty;

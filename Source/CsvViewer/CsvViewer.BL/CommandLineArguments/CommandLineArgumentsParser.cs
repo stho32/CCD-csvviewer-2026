@@ -5,8 +5,7 @@ using CsvViewer.BL.Common;
 namespace CsvViewer.BL.CommandLineArguments;
 
 /// <summary>
-/// Wandelt Kommandozeilen-Argumente in <see cref="CommandLineOptions"/> um.
-/// Schreibt nichts auf die Konsole — Hilfe-/Fehlertexte kommen als Fehler-Result zurück.
+/// Schreibt nichts auf die Konsole — Hilfe- und Fehlertexte kommen als Fehler-Result zurück.
 /// </summary>
 public static class CommandLineArgumentsParser
 {

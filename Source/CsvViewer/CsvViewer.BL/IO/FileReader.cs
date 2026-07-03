@@ -3,11 +3,6 @@ using CsvViewer.BL.Common;
 
 namespace CsvViewer.BL.IO;
 
-/// <summary>
-/// I/O-Randbaustein nach IODA: liest eine Datei als UTF-8-Zeilen.
-/// Kennt kein CSV. I/O-Exceptions werden abgefangen und in ein
-/// Fehler-<see cref="Result{T}"/> übersetzt (keine Exceptions über Bausteingrenzen).
-/// </summary>
 public sealed class FileReader : IFileReader
 {
     public Result<IReadOnlyList<string>> ReadLines(string path)

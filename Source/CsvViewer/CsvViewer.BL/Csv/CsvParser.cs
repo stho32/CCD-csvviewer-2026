@@ -3,10 +3,7 @@ using CsvViewer.BL.Common;
 namespace CsvViewer.BL.Csv;
 
 /// <summary>
-/// Pure Operation nach IODA: wandelt rohe Textzeilen in ein <see cref="CsvDocument"/> um.
-/// Kein I/O, keine Seiteneffekte. Trennt Felder am Semikolon, interpretiert die erste
-/// Zeile als Kopfzeile und validiert die Struktur. Zellinhalte bleiben unverändert
-/// (kein Quoting/Escaping).
+/// Erste Zeile = Kopfzeile; Zellinhalte bleiben unverändert (kein Quoting/Escaping) — R00001.
 /// </summary>
 public static class CsvParser
 {

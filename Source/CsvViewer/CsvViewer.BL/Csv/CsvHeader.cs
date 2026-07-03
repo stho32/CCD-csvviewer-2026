@@ -1,6 +1,5 @@
 namespace CsvViewer.BL.Csv;
 
-/// <summary>Kopfzeile einer CSV-Datei: die Spaltennamen in Original-Reihenfolge.</summary>
 public class CsvHeader
 {
     private readonly string[] _columnNames;

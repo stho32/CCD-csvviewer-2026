@@ -3,10 +3,6 @@ using CsvViewer.BL.Common;
 
 namespace CsvViewer.BL.Tests.Csv;
 
-/// <summary>
-/// Unit-Tests für <see cref="CsvParser"/> — rein in-memory (Zeilen → Dokument).
-/// Deckt alle Format- und Validierungsfälle aus R00001 ab.
-/// </summary>
 public class CsvParserTests
 {
     [Test]

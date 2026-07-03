@@ -1,6 +1,5 @@
 namespace CsvViewer.BL.Csv;
 
-/// <summary>Geordnete Datensätze einer CSV-Datei.</summary>
 public class CsvRowCollection
 {
     private readonly CsvRow[] _rows;
