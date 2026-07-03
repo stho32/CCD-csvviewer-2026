@@ -21,7 +21,7 @@ public static class CommandLineArgumentsParser
             return new Result<CommandLineOptions>(parsed.Value, true, string.Empty);
         }
 
-        string hilfetext = HelpText.AutoBuild(parserResult).ToString();
-        return new Result<CommandLineOptions>(null, false, hilfetext);
+        string helpText = HelpText.AutoBuild(parserResult).ToString();
+        return new Result<CommandLineOptions>(null, false, helpText);
     }
 }
