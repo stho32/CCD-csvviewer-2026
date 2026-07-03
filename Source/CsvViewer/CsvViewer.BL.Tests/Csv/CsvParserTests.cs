@@ -6,7 +6,7 @@ namespace CsvViewer.BL.Tests.Csv;
 public class CsvParserTests
 {
     [Test]
-    public void Parse_HeaderUndDatenzeilen_LiefertDokumentMitZeilenInReihenfolge()
+    public void Wenn_HeaderUndDatenzeilen_dann_DokumentMitZeilenInReihenfolge()
     {
         // Arrange
         var lines = new List<string>
@@ -31,7 +31,7 @@ public class CsvParserTests
     }
 
     [Test]
-    public void Parse_GueltigesDokument_FeldwerteSindPositionsbasiertZugreifbar()
+    public void Wenn_GueltigesDokument_dann_FeldwertePositionsbasiertZugreifbar()
     {
         // Arrange
         var lines = new List<string>
@@ -52,7 +52,7 @@ public class CsvParserTests
     }
 
     [Test]
-    public void Parse_LeereEingabe_LiefertFehlerResult()
+    public void Wenn_LeereEingabe_dann_FehlerResult()
     {
         // Arrange
         var lines = new List<string>();
@@ -67,7 +67,7 @@ public class CsvParserTests
     }
 
     [Test]
-    public void Parse_NullEingabe_LiefertFehlerResult()
+    public void Wenn_NullEingabe_dann_FehlerResult()
     {
         // Act
         Result<CsvDocument> result = CsvParser.Parse(null!);
@@ -78,7 +78,7 @@ public class CsvParserTests
     }
 
     [Test]
-    public void Parse_NurKopfzeile_LiefertGueltigesDokumentMitNullDatensaetzen()
+    public void Wenn_NurKopfzeile_dann_GueltigesDokumentMitNullDatensaetzen()
     {
         // Arrange
         var lines = new List<string> { "Vorname;Nachname;Alter" };
@@ -94,7 +94,7 @@ public class CsvParserTests
     }
 
     [Test]
-    public void Parse_DatenzeileMitZuWenigFeldern_LiefertFehlerResult()
+    public void Wenn_DatenzeileMitZuWenigFeldern_dann_FehlerResult()
     {
         // Arrange
         var lines = new List<string>
@@ -113,7 +113,7 @@ public class CsvParserTests
     }
 
     [Test]
-    public void Parse_DatenzeileMitZuVielenFeldern_LiefertFehlerResult()
+    public void Wenn_DatenzeileMitZuVielenFeldern_dann_FehlerResult()
     {
         // Arrange
         var lines = new List<string>
@@ -132,7 +132,7 @@ public class CsvParserTests
     }
 
     [Test]
-    public void Parse_Zellinhalte_WerdenUnveraendertUebernommen()
+    public void Wenn_ZellinhalteMitSonderzeichen_dann_UnveraendertUebernommen()
     {
         // Arrange — Anführungszeichen, Leerraum und Backslashes bleiben ohne Quoting/Escaping erhalten
         var lines = new List<string>
@@ -150,7 +150,7 @@ public class CsvParserTests
     }
 
     [Test]
-    public void Parse_LeereFeldwerte_BleibenAlsLeereStringsErhalten()
+    public void Wenn_LeereFeldwerte_dann_AlsLeereStringsErhalten()
     {
         // Arrange — aufeinanderfolgende Semikola ergeben leere Felder, die zählen mit
         var lines = new List<string>
