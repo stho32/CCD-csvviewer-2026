@@ -25,10 +25,11 @@ public static class CsvParser
             string[] fields = lines[i].Split(Delimiter);
             if (fields.Length != header.ColumnCount)
             {
+                int lineNumber = i + 1;
                 return new Result<CsvDocument>(
                     null,
                     false,
-                    $"Zeile {i + 1} hat {fields.Length} Feld(er), erwartet wurden {header.ColumnCount} " +
+                    $"Zeile {lineNumber} hat {fields.Length} Feld(er), erwartet wurden {header.ColumnCount} " +
                     "gemäß Kopfzeile.");
             }
 
