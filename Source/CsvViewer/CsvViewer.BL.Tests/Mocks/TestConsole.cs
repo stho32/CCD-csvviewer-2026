@@ -15,15 +15,24 @@ internal sealed class TestConsole : IConsole
     public int ClearCount { get; private set; }
     public int ReadCount { get; private set; }
     public List<string> WrittenTexts { get; } = [];
+    public bool FailClear { get; init; }
+    public bool FailWrite { get; init; }
 
     public Result Clear()
     {
         ClearCount++;
-        return new Result(true, string.Empty);
+        return FailClear
+            ? new Result(false, "Testfehler beim Leeren.")
+            : new Result(true, string.Empty);
     }
 
     public Result Write(string text)
     {
+        if (FailWrite)
+        {
+            return new Result(false, "Testfehler beim Schreiben.");
+        }
+
         WrittenTexts.Add(text);
         return new Result(true, string.Empty);
     }

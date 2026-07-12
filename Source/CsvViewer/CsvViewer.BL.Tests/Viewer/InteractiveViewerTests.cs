@@ -102,6 +102,97 @@ public class InteractiveViewerTests
         Assert.That(console.WrittenTexts, Is.Empty);
     }
 
+    [Test]
+    public void Wenn_SeitenNullSind_dann_KeineKonsolenaktionFindetStatt()
+    {
+        // Arrange
+        var console = new TestConsole('E');
+        var viewer = new InteractiveViewer(console, new TableRenderer());
+
+        // Act
+        Result result = viewer.Run(null);
+
+        // Assert
+        Assert.That(result.IsSuccess, Is.False);
+        Assert.That(console.ClearCount, Is.Zero);
+        Assert.That(console.ReadCount, Is.Zero);
+        Assert.That(console.WrittenTexts, Is.Empty);
+    }
+
+    [Test]
+    public void Wenn_KeineTasteVerfuegbarIst_dann_NachErsterAusgabeWirdAbgebrochen()
+    {
+        // Arrange
+        var console = new TestConsole();
+        var viewer = new InteractiveViewer(console, new TableRenderer());
+
+        // Act
+        Result result = viewer.Run(CreatePages("eins"));
+
+        // Assert
+        Assert.That(result.IsSuccess, Is.False);
+        Assert.That(result.Message, Does.Contain("Keine Testtaste"));
+        Assert.That(console.ClearCount, Is.EqualTo(1));
+        Assert.That(console.WrittenTexts, Has.Count.EqualTo(1));
+        Assert.That(console.ReadCount, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void Wenn_LeerenFehlschlaegt_dann_WederAusgabeNochEingabeFindetStatt()
+    {
+        // Arrange
+        var console = new TestConsole('E') { FailClear = true };
+        var viewer = new InteractiveViewer(console, new TableRenderer());
+
+        // Act
+        Result result = viewer.Run(CreatePages("eins"));
+
+        // Assert
+        Assert.That(result.IsSuccess, Is.False);
+        Assert.That(result.Message, Does.Contain("Leeren"));
+        Assert.That(console.ClearCount, Is.EqualTo(1));
+        Assert.That(console.WrittenTexts, Is.Empty);
+        Assert.That(console.ReadCount, Is.Zero);
+    }
+
+    [Test]
+    public void Wenn_RendernFehlschlaegt_dann_WederAusgabeNochEingabeFindetStatt()
+    {
+        // Arrange
+        var console = new TestConsole('E');
+        var renderer = new FailingTableRenderer();
+        var viewer = new InteractiveViewer(console, renderer);
+
+        // Act
+        Result result = viewer.Run(CreatePages("eins"));
+
+        // Assert
+        Assert.That(result.IsSuccess, Is.False);
+        Assert.That(result.Message, Does.Contain("Rendern"));
+        Assert.That(console.ClearCount, Is.EqualTo(1));
+        Assert.That(renderer.RenderCount, Is.EqualTo(1));
+        Assert.That(console.WrittenTexts, Is.Empty);
+        Assert.That(console.ReadCount, Is.Zero);
+    }
+
+    [Test]
+    public void Wenn_SchreibenFehlschlaegt_dann_KeineEingabeFindetStatt()
+    {
+        // Arrange
+        var console = new TestConsole('E') { FailWrite = true };
+        var viewer = new InteractiveViewer(console, new TableRenderer());
+
+        // Act
+        Result result = viewer.Run(CreatePages("eins"));
+
+        // Assert
+        Assert.That(result.IsSuccess, Is.False);
+        Assert.That(result.Message, Does.Contain("Schreiben"));
+        Assert.That(console.ClearCount, Is.EqualTo(1));
+        Assert.That(console.WrittenTexts, Is.Empty);
+        Assert.That(console.ReadCount, Is.Zero);
+    }
+
     private static IReadOnlyList<CsvDocument> CreatePages(params string[] values)
     {
         return values
