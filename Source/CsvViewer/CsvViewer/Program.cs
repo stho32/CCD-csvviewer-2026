@@ -10,7 +10,7 @@ internal class Program
     {
         ILogger logger = new ConsoleLogger();
 
-        Result<CommandLineOptions> optionsResult = CommandLineArgumentsParser.Parse(args);
+        Result<ViewerArguments> optionsResult = CommandLineArgumentsParser.Parse(args);
         if (!optionsResult.IsSuccess)
         {
             logger.Error(optionsResult.Message);

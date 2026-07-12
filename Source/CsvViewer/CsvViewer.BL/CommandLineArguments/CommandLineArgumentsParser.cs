@@ -9,7 +9,7 @@ namespace CsvViewer.BL.CommandLineArguments;
 /// </summary>
 public static class CommandLineArgumentsParser
 {
-    public static Result<CommandLineOptions> Parse(string[] args)
+    public static Result<ViewerArguments> Parse(string[] args)
     {
         using var parser = new Parser(settings => settings.HelpWriter = null);
         ParserResult<CommandLineOptions> parserResult =
@@ -17,10 +17,11 @@ public static class CommandLineArgumentsParser
 
         if (parserResult is Parsed<CommandLineOptions> parsed)
         {
-            return new Result<CommandLineOptions>(parsed.Value, true, string.Empty);
+            var viewerArguments = new ViewerArguments(parsed.Value.File);
+            return new Result<ViewerArguments>(viewerArguments, true, string.Empty);
         }
 
         string helpText = HelpText.AutoBuild(parserResult).ToString();
-        return new Result<CommandLineOptions>(null, false, helpText);
+        return new Result<ViewerArguments>(null, false, helpText);
     }
 }
