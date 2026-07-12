@@ -1,8 +1,9 @@
 using CsvViewer.BL.Common;
+using CsvViewer.BL.Logging;
 
-namespace CsvViewer.BL.Logging;
+namespace CsvViewer.HostSpecific.Logging;
 
-public sealed class ConsoleLogger : ILogger
+internal sealed class ConsoleLogger : ILogger
 {
     public Result Error(string message)
     {

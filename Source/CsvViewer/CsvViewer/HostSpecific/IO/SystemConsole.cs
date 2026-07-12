@@ -1,7 +1,7 @@
 using CsvViewer.BL.Common;
 using CsvViewer.BL.IO;
 
-namespace CsvViewer;
+namespace CsvViewer.HostSpecific.IO;
 
 internal sealed class SystemConsole : IConsole
 {
