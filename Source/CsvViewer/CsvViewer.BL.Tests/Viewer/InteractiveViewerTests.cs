@@ -120,6 +120,24 @@ public class InteractiveViewerTests
     }
 
     [Test]
+    public void Wenn_ViewerAbhaengigkeitFehlt_dann_ViewerStartetNicht()
+    {
+        // Arrange
+        var console = new TestConsole('E');
+        var viewer = new InteractiveViewer(console, null);
+
+        // Act
+        Result result = viewer.Run(CreatePages("eins"));
+
+        // Assert
+        Assert.That(result.IsSuccess, Is.False);
+        Assert.That(result.Message, Does.Contain("Abhängigkeiten"));
+        Assert.That(console.ClearCount, Is.Zero);
+        Assert.That(console.ReadCount, Is.Zero);
+        Assert.That(console.WrittenTexts, Is.Empty);
+    }
+
+    [Test]
     public void Wenn_KeineTasteVerfuegbarIst_dann_NachErsterAusgabeWirdAbgebrochen()
     {
         // Arrange

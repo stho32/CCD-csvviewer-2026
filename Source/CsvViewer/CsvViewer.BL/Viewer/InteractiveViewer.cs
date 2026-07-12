@@ -11,10 +11,10 @@ public sealed class InteractiveViewer
     public const string Menu =
         "F)irst page, P)revious page, N)ext page, L)ast page, E)xit";
 
-    private readonly IConsole _console;
-    private readonly ITableRenderer _tableRenderer;
+    private readonly IConsole? _console;
+    private readonly ITableRenderer? _tableRenderer;
 
-    public InteractiveViewer(IConsole console, ITableRenderer tableRenderer)
+    public InteractiveViewer(IConsole? console, ITableRenderer? tableRenderer)
     {
         _console = console;
         _tableRenderer = tableRenderer;
@@ -22,6 +22,11 @@ public sealed class InteractiveViewer
 
     public Result Run(IReadOnlyList<CsvDocument>? pages)
     {
+        if (_console is null || _tableRenderer is null)
+        {
+            return new Result(false, "Die Viewer-Abhängigkeiten fehlen.");
+        }
+
         if (pages is null || pages.Count == 0)
         {
             return new Result(false, "Der Viewer benötigt mindestens eine Seite.");
@@ -37,7 +42,10 @@ public sealed class InteractiveViewer
 
         while (true)
         {
-            Result drawResult = DrawPage(pages[navigator.CurrentPageIndex]);
+            Result drawResult = DrawPage(
+                pages[navigator.CurrentPageIndex],
+                _console,
+                _tableRenderer);
             if (!drawResult.IsSuccess)
             {
                 return drawResult;
@@ -69,21 +77,24 @@ public sealed class InteractiveViewer
         }
     }
 
-    private Result DrawPage(CsvDocument page)
+    private static Result DrawPage(
+        CsvDocument page,
+        IConsole console,
+        ITableRenderer tableRenderer)
     {
-        Result clearResult = _console.Clear();
+        Result clearResult = console.Clear();
         if (!clearResult.IsSuccess)
         {
             return clearResult;
         }
 
-        Result<string> tableResult = _tableRenderer.Render(page);
+        Result<string> tableResult = tableRenderer.Render(page);
         if (!tableResult.IsSuccess)
         {
             return new Result(false, tableResult.Message);
         }
 
-        return _console.Write(
+        return console.Write(
             $"{tableResult.Value}{Environment.NewLine}{Menu}{Environment.NewLine}");
     }
 }

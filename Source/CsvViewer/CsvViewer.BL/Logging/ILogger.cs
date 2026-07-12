@@ -1,7 +1,9 @@
+using CsvViewer.BL.Common;
+
 namespace CsvViewer.BL.Logging;
 
 public interface ILogger
 {
-    void Info(string message);
-    void Error(string message);
+    Result Info(string message);
+    Result Error(string message);
 }

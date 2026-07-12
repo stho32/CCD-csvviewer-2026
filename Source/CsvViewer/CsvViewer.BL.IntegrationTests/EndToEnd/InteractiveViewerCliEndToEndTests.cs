@@ -5,6 +5,9 @@ namespace CsvViewer.BL.IntegrationTests.EndToEnd;
 
 public class InteractiveViewerCliEndToEndTests
 {
+    private static readonly string BuildConfiguration =
+        Directory.GetParent(TestContext.CurrentContext.TestDirectory)!.Name;
+
     private static readonly string ProjectPath = Path.GetFullPath(
         Path.Combine(
             TestContext.CurrentContext.TestDirectory,
@@ -293,6 +296,8 @@ public class InteractiveViewerCliEndToEndTests
         yield return "run";
         yield return "--no-build";
         yield return "--no-restore";
+        yield return "--configuration";
+        yield return BuildConfiguration;
         yield return "--project";
         yield return ProjectPath;
         yield return "--";
