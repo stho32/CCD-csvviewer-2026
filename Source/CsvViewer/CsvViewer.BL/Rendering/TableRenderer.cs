@@ -1,12 +1,18 @@
 using System.Text;
+using CsvViewer.BL.Common;
 using CsvViewer.BL.Csv;
 
 namespace CsvViewer.BL.Rendering;
 
 public sealed class TableRenderer : ITableRenderer
 {
-    public string Render(CsvDocument page)
+    public Result<string> Render(CsvDocument? page)
     {
+        if (page is null)
+        {
+            return new Result<string>(null, false, "Die zu rendernde Seite fehlt.");
+        }
+
         int[] columnWidths = CalculateColumnWidths(page);
         var lines = new string[page.Rows.RowCount + 2];
 
@@ -23,7 +29,10 @@ public sealed class TableRenderer : ITableRenderer
                 columnIndex => row[columnIndex]);
         }
 
-        return string.Join(Environment.NewLine, lines);
+        return new Result<string>(
+            string.Join(Environment.NewLine, lines),
+            true,
+            string.Empty);
     }
 
     private static int[] CalculateColumnWidths(CsvDocument page)

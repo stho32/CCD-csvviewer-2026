@@ -17,7 +17,7 @@ public class TableRendererTests
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page);
+        string result = renderer.Render(page).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -39,7 +39,7 @@ public class TableRendererTests
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page);
+        string result = renderer.Render(page).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -59,7 +59,7 @@ public class TableRendererTests
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page);
+        string result = renderer.Render(page).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -78,8 +78,8 @@ public class TableRendererTests
         var renderer = new TableRenderer();
 
         // Act
-        string shortResult = renderer.Render(shortPage);
-        string wideResult = renderer.Render(widePage);
+        string shortResult = renderer.Render(shortPage).Value!;
+        string wideResult = renderer.Render(widePage).Value!;
 
         // Assert
         Assert.That(
@@ -98,7 +98,7 @@ public class TableRendererTests
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page);
+        string result = renderer.Render(page).Value!;
 
         // Assert
         Assert.That(
@@ -117,7 +117,7 @@ public class TableRendererTests
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page);
+        string result = renderer.Render(page).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -136,7 +136,7 @@ public class TableRendererTests
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page);
+        string result = renderer.Render(page).Value!;
 
         // Assert
         Assert.That(
@@ -154,7 +154,7 @@ public class TableRendererTests
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page);
+        string result = renderer.Render(page).Value!;
 
         // Assert
         string expected = JoinLines(

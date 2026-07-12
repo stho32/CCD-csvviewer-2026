@@ -20,7 +20,7 @@ public class TableRendererIntegrationTests
 
         // Act
         Result<CsvDocument> parseResult = CsvParser.Parse(lines);
-        string renderedTable = renderer.Render(parseResult.Value!);
+        string renderedTable = renderer.Render(parseResult.Value!).Value!;
 
         // Assert
         Assert.That(parseResult.IsSuccess, Is.True);
@@ -41,7 +41,7 @@ public class TableRendererIntegrationTests
 
         // Act
         Result<CsvDocument> parseResult = CsvParser.Parse(lines);
-        string renderedTable = renderer.Render(parseResult.Value!);
+        string renderedTable = renderer.Render(parseResult.Value!).Value!;
 
         // Assert
         Assert.That(parseResult.IsSuccess, Is.True);

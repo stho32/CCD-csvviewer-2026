@@ -1,3 +1,3 @@
 namespace CsvViewer.BL.CommandLineArguments;
 
-public sealed record ViewerArguments(string FilePath);
+public sealed record ViewerArguments(string FilePath, int PageSize = 10);
