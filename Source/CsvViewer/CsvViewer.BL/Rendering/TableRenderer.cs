@@ -1,0 +1,79 @@
+using System.Text;
+using CsvViewer.BL.Csv;
+
+namespace CsvViewer.BL.Rendering;
+
+public sealed class TableRenderer : ITableRenderer
+{
+    public string Render(CsvDocument page)
+    {
+        int[] columnWidths = CalculateColumnWidths(page);
+        var lines = new string[page.Rows.RowCount + 2];
+
+        lines[0] = BuildValueLine(
+            columnWidths,
+            columnIndex => page.Header[columnIndex]);
+        lines[1] = BuildSeparatorLine(columnWidths);
+
+        for (int rowIndex = 0; rowIndex < page.Rows.RowCount; rowIndex++)
+        {
+            CsvRow row = page.Rows[rowIndex];
+            lines[rowIndex + 2] = BuildValueLine(
+                columnWidths,
+                columnIndex => row[columnIndex]);
+        }
+
+        return string.Join(Environment.NewLine, lines);
+    }
+
+    private static int[] CalculateColumnWidths(CsvDocument page)
+    {
+        var columnWidths = new int[page.Header.ColumnCount];
+
+        for (int columnIndex = 0; columnIndex < page.Header.ColumnCount; columnIndex++)
+        {
+            columnWidths[columnIndex] = page.Header[columnIndex].Length;
+        }
+
+        for (int rowIndex = 0; rowIndex < page.Rows.RowCount; rowIndex++)
+        {
+            CsvRow row = page.Rows[rowIndex];
+            for (int columnIndex = 0; columnIndex < page.Header.ColumnCount; columnIndex++)
+            {
+                columnWidths[columnIndex] = Math.Max(
+                    columnWidths[columnIndex],
+                    row[columnIndex].Length);
+            }
+        }
+
+        return columnWidths;
+    }
+
+    private static string BuildValueLine(
+        IReadOnlyList<int> columnWidths,
+        Func<int, string> getValue)
+    {
+        var line = new StringBuilder();
+
+        for (int columnIndex = 0; columnIndex < columnWidths.Count; columnIndex++)
+        {
+            line.Append(getValue(columnIndex).PadRight(columnWidths[columnIndex]));
+            line.Append('|');
+        }
+
+        return line.ToString();
+    }
+
+    private static string BuildSeparatorLine(IReadOnlyList<int> columnWidths)
+    {
+        var line = new StringBuilder();
+
+        foreach (int columnWidth in columnWidths)
+        {
+            line.Append('-', columnWidth);
+            line.Append('+');
+        }
+
+        return line.ToString();
+    }
+}
