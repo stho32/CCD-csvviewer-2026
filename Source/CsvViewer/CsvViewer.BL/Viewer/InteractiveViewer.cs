@@ -2,6 +2,7 @@ using CsvViewer.BL.Common;
 using CsvViewer.BL.Csv;
 using CsvViewer.BL.IO;
 using CsvViewer.BL.Navigation;
+using CsvViewer.BL.Paging;
 using CsvViewer.BL.Rendering;
 
 namespace CsvViewer.BL.Viewer;
@@ -20,19 +21,19 @@ public sealed class InteractiveViewer
         _tableRenderer = tableRenderer;
     }
 
-    public Result Run(IReadOnlyList<CsvDocument>? pages)
+    public Result Run(CsvPageCollection? pages)
     {
         if (_console is null || _tableRenderer is null)
         {
             return new Result(false, "Die Viewer-Abhängigkeiten fehlen.");
         }
 
-        if (pages is null || pages.Count == 0)
+        if (pages is null || pages.PageCount == 0)
         {
             return new Result(false, "Der Viewer benötigt mindestens eine Seite.");
         }
 
-        Result<PageNavigator> navigatorResult = PageNavigator.Create(pages.Count);
+        Result<PageNavigator> navigatorResult = PageNavigator.Create(pages.PageCount);
         if (!navigatorResult.IsSuccess)
         {
             return new Result(false, navigatorResult.Message);

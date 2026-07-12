@@ -3,6 +3,7 @@ using CsvViewer.BL.CommandLineArguments;
 using CsvViewer.BL.Common;
 using CsvViewer.BL.Csv;
 using CsvViewer.BL.IntegrationTests.Mocks;
+using CsvViewer.BL.IntegrationTests.TestFiles;
 using CsvViewer.BL.IO;
 using CsvViewer.BL.Paging;
 using CsvViewer.BL.Rendering;
@@ -16,7 +17,7 @@ public class ViewerFlowIntegrationTests
     public void Wenn_ElfZeilenOhneSeitengroesseGeoeffnetWerden_dann_ErsteZehnWerdenAngezeigt()
     {
         // Arrange
-        string path = WriteTemporaryCsv(
+        string path = TemporaryCsv.Write(
             ["Nummer", .. Enumerable.Range(1, 11).Select(number => number.ToString())]);
         string contentsBefore = File.ReadAllText(path, Encoding.UTF8);
         var console = new TestConsole('E');
@@ -46,7 +47,7 @@ public class ViewerFlowIntegrationTests
     public void Wenn_EigeneSeitengroesseVerwendetUndNextGedruecktWird_dann_RestseiteWirdAngezeigt()
     {
         // Arrange
-        string path = WriteTemporaryCsv(["Wert", "eins", "zwei", "drei"]);
+        string path = TemporaryCsv.Write(["Wert", "eins", "zwei", "drei"]);
         string contentsBefore = File.ReadAllText(path, Encoding.UTF8);
         var console = new TestConsole('N', 'E');
 
@@ -76,7 +77,7 @@ public class ViewerFlowIntegrationTests
     public void Wenn_DateiNurHeaderEnthaelt_dann_EineLeereSeiteMitMenueWirdAngezeigt()
     {
         // Arrange
-        string path = WriteTemporaryCsv(["Vorname;Nachname"]);
+        string path = TemporaryCsv.Write(["Vorname;Nachname"]);
         var console = new TestConsole('E');
 
         try
@@ -122,7 +123,7 @@ public class ViewerFlowIntegrationTests
             return new Result(false, parseResult.Message);
         }
 
-        Result<IReadOnlyList<CsvDocument>> pagesResult =
+        Result<CsvPageCollection> pagesResult =
             Paginator.Paginate(parseResult.Value, argumentsResult.Value.PageSize);
         if (!pagesResult.IsSuccess)
         {
@@ -130,14 +131,5 @@ public class ViewerFlowIntegrationTests
         }
 
         return new InteractiveViewer(console, new TableRenderer()).Run(pagesResult.Value);
-    }
-
-    private static string WriteTemporaryCsv(string[] lines)
-    {
-        string path = Path.Combine(
-            Path.GetTempPath(),
-            $"CsvViewer_R00003_{Guid.NewGuid():N}.csv");
-        File.WriteAllLines(path, lines, Encoding.UTF8);
-        return path;
     }
 }

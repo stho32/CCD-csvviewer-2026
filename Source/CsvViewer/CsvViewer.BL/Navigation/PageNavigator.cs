@@ -31,23 +31,29 @@ public sealed class PageNavigator
 
     public Result<int> Apply(NavigationCommand command)
     {
-        if (!Enum.IsDefined(command))
+        switch (command)
         {
-            return new Result<int>(
-                CurrentPageIndex,
-                false,
-                "Der Navigationsbefehl ist unbekannt.");
+            case NavigationCommand.First:
+                CurrentPageIndex = 0;
+                break;
+            case NavigationCommand.Previous:
+                CurrentPageIndex = Math.Max(0, CurrentPageIndex - 1);
+                break;
+            case NavigationCommand.Next:
+                CurrentPageIndex = Math.Min(_lastPageIndex, CurrentPageIndex + 1);
+                break;
+            case NavigationCommand.Last:
+                CurrentPageIndex = _lastPageIndex;
+                break;
+            case NavigationCommand.Exit:
+            case NavigationCommand.None:
+                break;
+            default:
+                return new Result<int>(
+                    CurrentPageIndex,
+                    false,
+                    "Der Navigationsbefehl ist unbekannt.");
         }
-
-        CurrentPageIndex = command switch
-        {
-            NavigationCommand.First => 0,
-            NavigationCommand.Previous => Math.Max(0, CurrentPageIndex - 1),
-            NavigationCommand.Next => Math.Min(_lastPageIndex, CurrentPageIndex + 1),
-            NavigationCommand.Last => _lastPageIndex,
-            NavigationCommand.Exit or NavigationCommand.None => CurrentPageIndex,
-            _ => CurrentPageIndex,
-        };
 
         return new Result<int>(CurrentPageIndex, true, string.Empty);
     }

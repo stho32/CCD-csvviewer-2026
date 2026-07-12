@@ -21,9 +21,13 @@ internal sealed class TestConsole : IConsole
     public Result Clear()
     {
         ClearCount++;
-        return FailClear
-            ? new Result(false, "Testfehler beim Leeren.")
-            : new Result(true, string.Empty);
+
+        if (FailClear)
+        {
+            return new Result(false, "Testfehler beim Leeren.");
+        }
+
+        return new Result(true, string.Empty);
     }
 
     public Result Write(string text)

@@ -1,6 +1,6 @@
-using System.Text;
 using CsvViewer.BL.Common;
 using CsvViewer.BL.Csv;
+using CsvViewer.BL.IntegrationTests.TestFiles;
 using CsvViewer.BL.IO;
 using CsvViewer.BL.Rendering;
 
@@ -12,7 +12,7 @@ public class TableRenderingEndToEndTests
     public void Wenn_GueltigeCsvDateiGerendertWird_dann_NutzerErhaeltLesbareTabelle()
     {
         // Arrange
-        string path = WriteTemporaryCsv(
+        string path = TemporaryCsv.Write(
             "Name;Age;City",
             "Peter;42;New York",
             "Paul;57;London",
@@ -42,8 +42,8 @@ public class TableRenderingEndToEndTests
     public void Wenn_DateienUnterschiedlichLangeSeitenwerteHaben_dann_BreitenPassenSichJeDateiAn()
     {
         // Arrange
-        string shortPagePath = WriteTemporaryCsv("Name", "Ada");
-        string widePagePath = WriteTemporaryCsv("Name", "Alexandria");
+        string shortPagePath = TemporaryCsv.Write("Name", "Ada");
+        string widePagePath = TemporaryCsv.Write("Name", "Alexandria");
 
         try
         {
@@ -70,8 +70,8 @@ public class TableRenderingEndToEndTests
     public void Wenn_CsvDateienVerschiedeneSpaltenzahlenHaben_dann_BeideWerdenGenerischGerendert()
     {
         // Arrange
-        string oneColumnPath = WriteTemporaryCsv("Wert", "eins");
-        string fourColumnPath = WriteTemporaryCsv(
+        string oneColumnPath = TemporaryCsv.Write("Wert", "eins");
+        string fourColumnPath = TemporaryCsv.Write(
             "A;BB;C;DD",
             "1;2;333;4");
 
@@ -111,15 +111,6 @@ public class TableRenderingEndToEndTests
         Assert.That(renderResult.IsSuccess, Is.True, renderResult.Message);
 
         return renderResult.Value!;
-    }
-
-    private static string WriteTemporaryCsv(params string[] lines)
-    {
-        string path = Path.Combine(
-            Path.GetTempPath(),
-            $"CsvViewer_R00002_{Guid.NewGuid():N}.csv");
-        File.WriteAllLines(path, lines, Encoding.UTF8);
-        return path;
     }
 
     private static string JoinLines(params string[] lines)

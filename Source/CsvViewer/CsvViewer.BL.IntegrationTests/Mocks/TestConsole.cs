@@ -29,8 +29,11 @@ internal sealed class TestConsole : IConsole
 
     public Result<char> ReadKey()
     {
-        return _keys.Count == 0
-            ? new Result<char>(default, false, "Keine Testtaste verfügbar.")
-            : new Result<char>(_keys.Dequeue(), true, string.Empty);
+        if (_keys.Count == 0)
+        {
+            return new Result<char>(default, false, "Keine Testtaste verfügbar.");
+        }
+
+        return new Result<char>(_keys.Dequeue(), true, string.Empty);
     }
 }

@@ -38,7 +38,7 @@ internal class Program
             return 1;
         }
 
-        Result<IReadOnlyList<CsvDocument>> pagesResult =
+        Result<CsvPageCollection> pagesResult =
             Paginator.Paginate(parseResult.Value, argumentsResult.Value.PageSize);
         if (!pagesResult.IsSuccess)
         {

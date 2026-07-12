@@ -5,13 +5,13 @@ namespace CsvViewer.BL.Paging;
 
 public static class Paginator
 {
-    public static Result<IReadOnlyList<CsvDocument>> Paginate(
+    public static Result<CsvPageCollection> Paginate(
         CsvDocument? document,
         int pageSize)
     {
         if (document is null)
         {
-            return new Result<IReadOnlyList<CsvDocument>>(
+            return new Result<CsvPageCollection>(
                 null,
                 false,
                 "Das CSV-Dokument fehlt.");
@@ -19,7 +19,7 @@ public static class Paginator
 
         if (pageSize <= 0)
         {
-            return new Result<IReadOnlyList<CsvDocument>>(
+            return new Result<CsvPageCollection>(
                 null,
                 false,
                 "Die Seitengröße muss größer als 0 sein.");
@@ -48,6 +48,9 @@ public static class Paginator
                     new CsvRowCollection(Array.Empty<CsvRow>())));
         }
 
-        return new Result<IReadOnlyList<CsvDocument>>(pages, true, string.Empty);
+        return new Result<CsvPageCollection>(
+            new CsvPageCollection(pages),
+            true,
+            string.Empty);
     }
 }

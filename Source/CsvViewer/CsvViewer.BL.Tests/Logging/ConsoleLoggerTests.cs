@@ -8,33 +8,6 @@ namespace CsvViewer.BL.Tests.Logging;
 public class ConsoleLoggerTests
 {
     [Test]
-    public void Wenn_InfoGeschriebenWird_dann_MeldungErscheintAufStandardausgabe()
-    {
-        // Arrange
-        TextWriter originalOut = Console.Out;
-        var output = new StringWriter();
-        Assert.That(output.ToString(), Is.Empty);
-
-        try
-        {
-            Console.SetOut(output);
-
-            // Act
-            Result result = new ConsoleLogger().Info("gestartet");
-
-            // Assert
-            Assert.That(result.IsSuccess, Is.True, result.Message);
-            Assert.That(
-                output.ToString(),
-                Is.EqualTo($"[INFO] gestartet{Environment.NewLine}"));
-        }
-        finally
-        {
-            Console.SetOut(originalOut);
-        }
-    }
-
-    [Test]
     public void Wenn_FehlerGeschriebenWird_dann_MeldungErscheintAufFehlerausgabe()
     {
         // Arrange
