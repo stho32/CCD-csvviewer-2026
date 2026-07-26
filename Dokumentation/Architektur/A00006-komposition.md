@@ -9,7 +9,7 @@ status: Aktiv
 herkunft: code
 quellen:
   - Source/CsvViewer/CsvViewer/Program.cs
-verwandt: [A00003, A00004, A00005]
+verwandt: [A00003, A00005, A00007, A00010, A00011]
 domaene: []
 ---
 
@@ -27,7 +27,7 @@ Verdrahtet die Komponenten zu einem lauffähigen Programm.
 
 ## Abhaengigkeiten
 
-Hängt von allen drei fachlichen Komponenten ab — [Dokument-Beschaffung](A00003-dokument-beschaffung.md), [Seiten-Darstellung](A00004-seiten-darstellung.md), [Bedienung](A00005-bedienung.md) — sowie von den konkreten Adaptern `SystemConsole` und `ConsoleLogger`.
+Hängt von allen fachlichen Komponenten ab — [Kommandozeilen-Interpretation](A00007-kommandozeilen-interpretation.md), [Dokument-Beschaffung](A00003-dokument-beschaffung.md), [Seiten-Aufteilung](A00010-seiten-aufteilung.md), [Tabellen-Rendering](A00011-tabellen-rendering.md), [Bedienung](A00005-bedienung.md) — sowie von den konkreten Adaptern `SystemConsole` und `ConsoleLogger`.
 
 Diese Allabhängigkeit ist **kein** Gottbaustein-Verstoss: Genau das ist die Aufgabe eines Composition Root. Umgekehrt kennt ihn niemand.
 

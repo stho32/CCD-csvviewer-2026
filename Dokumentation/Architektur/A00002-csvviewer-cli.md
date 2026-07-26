@@ -58,10 +58,10 @@ Jeder Schritt liefert `Result<T>`; beim ersten Fehler bricht `Program` ab und bi
 | [Bedienung](A00005-bedienung.md) | Wie steuert der Mensch das? |
 | [Komposition](A00006-komposition.md) | Wer steckt alles zusammen? |
 
-Zwei Schnitte sind das Ergebnis von Korrekturen, die beim Modellieren auffielen:
+Zwei Schnitte verdienen eine Begründung, weil sie nicht der Intuition folgen:
 
-- Die Kommandozeilen-Interpretation steht **vor** der Dokument-Beschaffung statt in ihr. Sie liefert zwei Werte, die auseinanderlaufen — der Dateipfad speist die Dokument-Beschaffung, die Seitengrösse die Seiten-Aufteilung ([R00006](../../Anforderungen/R00006-kommandozeilen-interpretation-trennen.md)).
-- Seiten-Aufteilung und Tabellen-Rendering sind **getrennt**, obwohl beide „mit Seiten zu tun haben". Sie kennen einander nicht, haben verschiedene Aufrufer und laufen in verschiedenen Phasen; der Renderer nimmt nicht einmal das Ergebnis der Aufteilung entgegen ([R00008](../../Anforderungen/R00008-ein-topic-ein-einstiegspunkt.md)). Der frühere Sammelbaustein [Seiten-Darstellung](A00004-seiten-darstellung.md) steht auf `Veraltet`.
+- Die Kommandozeilen-Interpretation steht **neben** der Dokument-Beschaffung, nicht in ihr. Sie liefert zwei Werte, die auseinanderlaufen — der Dateipfad speist die Dokument-Beschaffung, die Seitengrösse die Seiten-Aufteilung ([R00006](../../Anforderungen/R00006-kommandozeilen-interpretation-trennen.md)).
+- Seiten-Aufteilung und Tabellen-Rendering sind **getrennt**, obwohl beide „mit Seiten zu tun haben". Sie kennen einander nicht, haben verschiedene Aufrufer und laufen in verschiedenen Phasen; der Renderer nimmt nicht einmal das Ergebnis der Aufteilung entgegen ([R00008](../../Anforderungen/R00008-ein-topic-ein-einstiegspunkt.md)).
 
 Sechs Komponenten sind hier kein Kompromiss, sondern das richtige Ergebnis. Die Faustregel „drei bis fünf" fragt nach einer Klammer, sie verbietet keine sechste Komponente — und eine echte Klammer gibt es hier nicht. Eine Gruppierung nach Lebenszyklus (`Startup/`, `Runtime/`) wäre erfunden: Sie ordnet nach Zeit statt nach Fachlichkeit und behauptet eine Zusammengehörigkeit, die im Code nicht existiert. Die flache Liste ist ehrlicher.
 

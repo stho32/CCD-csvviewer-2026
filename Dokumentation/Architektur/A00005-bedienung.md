@@ -11,7 +11,7 @@ quellen:
   - Source/CsvViewer/CsvViewer.BL/Interaction/
   - Source/CsvViewer/CsvViewer.BL/HostContracts/IConsole.cs
   - Source/CsvViewer/CsvViewer/HostSpecific/
-verwandt: [A00004]
+verwandt: [A00011]
 domaene: [D00004]
 ---
 

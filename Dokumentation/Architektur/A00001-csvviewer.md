@@ -77,3 +77,5 @@ Es existieren keine ADRs unter `Dokumentation/ADRs/`. Die tragenden Entscheidung
 - Die Testprojekte sollen nicht als Bausteine im Modell erscheinen.
 
 **Herkunft im Übrigen** — Zweck, Schnittstellen und Struktur sind aus `README.md`, den Anforderungen und dem Quellcode belegt und dort nachprüfbar.
+
+**Vergebene IDs** — die nächste freie ID ist `A00015`. `A00004` wurde vergeben und wieder entfernt; die Nummer wird nicht wiederverwendet.

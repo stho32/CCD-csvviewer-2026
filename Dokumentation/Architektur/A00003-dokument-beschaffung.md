@@ -10,7 +10,7 @@ herkunft: code
 quellen:
   - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/
   - Source/CsvViewer/CsvViewer.BL/HostContracts/IFileReader.cs
-verwandt: [A00004]
+verwandt: [A00010]
 domaene: [D00001]
 ---
 
