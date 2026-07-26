@@ -63,7 +63,11 @@ Zwei Schnitte sind das Ergebnis von Korrekturen, die beim Modellieren auffielen:
 - Die Kommandozeilen-Interpretation steht **vor** der Dokument-Beschaffung statt in ihr. Sie liefert zwei Werte, die auseinanderlaufen — der Dateipfad speist die Dokument-Beschaffung, die Seitengrösse die Seiten-Aufteilung ([R00006](../../Anforderungen/R00006-kommandozeilen-interpretation-trennen.md)).
 - Seiten-Aufteilung und Tabellen-Rendering sind **getrennt**, obwohl beide „mit Seiten zu tun haben". Sie kennen einander nicht, haben verschiedene Aufrufer und laufen in verschiedenen Phasen; der Renderer nimmt nicht einmal das Ergebnis der Aufteilung entgegen ([R00008](../../Anforderungen/R00008-ein-topic-ein-einstiegspunkt.md)). Der frühere Sammelbaustein [Seiten-Darstellung](A00004-seiten-darstellung.md) steht auf `Veraltet`.
 
-Sechs Komponenten liegen über der Faustregel „drei bis fünf" — bewusst in Kauf genommen, weil sechs klar geschnittene Topics besser sind als fünf, von denen eines zwei Dinge vermischt. `Komposition` ist dabei reine Technik ohne fachliche Entsprechung.
+Sechs Komponenten sind hier kein Kompromiss, sondern das richtige Ergebnis. Die Faustregel „drei bis fünf" fragt nach einer Klammer, sie verbietet keine sechste Komponente — und eine echte Klammer gibt es hier nicht. Eine Gruppierung nach Lebenszyklus (`Startup/`, `Runtime/`) wäre erfunden: Sie ordnet nach Zeit statt nach Fachlichkeit und behauptet eine Zusammengehörigkeit, die im Code nicht existiert. Die flache Liste ist ehrlicher.
+
+`Komposition` ist dabei reine Technik ohne fachliche Entsprechung.
+
+**Topic oder Gruppierung** — jeder dieser sechs Ordner ist ein *Topic*: Er hat genau einen Einstiegspunkt, also einen Typ, dessen Methode von aussen gerufen wird. Ein *Gruppierungs*-Ordner hätte keinen und dürfte ausschliesslich weitere Topics enthalten. In diesem Projekt kommt keine Gruppierung vor; erst bei deutlich mehr Topics mit echter gemeinsamer Klammer wäre eine sinnvoll.
 
 **Modell und Ordnerstruktur** — die Ordner der Geschäftslogik tragen die englische Entsprechung der Bausteinnamen:
 

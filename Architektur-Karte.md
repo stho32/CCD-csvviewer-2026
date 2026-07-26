@@ -131,9 +131,14 @@ Die Trennung von `Pagination/` und `TableRendering/` wird hier sichtbar: Die Auf
 
 Die gestrichelten Kanten sind kein eigener Kontrollfluss, sondern das `Result`-Muster: Jeder Schritt gibt Erfolg oder Fehler an den Composition Root zurück, und nur dieser übersetzt ihn in einen Exit-Code.
 
-## Ablage innerhalb eines Topics
+## Ablage-Regeln
 
-Jedes Topic hat genau **einen** Typ auf oberster Ebene — den Einstiegspunkt, dessen Methode von außerhalb gerufen wird. Alles Weitere liegt eine Stufe tiefer:
+Es gibt zwei Sorten von Ordnern, unterschieden an einem nachzählbaren Merkmal — der Zahl der **Einstiegspunkte**, also der Typen, deren Methoden von außerhalb des Ordners gerufen werden. Datentypen zählen nicht mit.
+
+| Sorte | Einstiegspunkte | Inhalt |
+|---|---|---|
+| **Topic** | genau einer | Einstieg oben, darunter `Data/` und `Operations/` |
+| **Gruppierung** | keiner | ausschließlich Topics oder weitere Gruppierungen |
 
 ```
 Topic/
@@ -142,7 +147,9 @@ Topic/
   Operations/            Helfer, die nur der Einstieg nutzt
 ```
 
-Einzige Ausnahme ist `TableRendering/`, das `ITableRenderer` und `TableRenderer` nebeneinander hält — Vertrag und einzige Umsetzung zu trennen würde nichts sichtbar machen.
+Alle sechs Ordner dieses Projekts sind Topics; eine Gruppierung kommt hier nicht vor. Einzige Ausnahme von der Ein-Datei-Regel ist `TableRendering/`, das `ITableRenderer` und `TableRenderer` nebeneinander hält — Vertrag und einzige Umsetzung zu trennen würde nichts sichtbar machen.
+
+Die Zahl der Topics ist nach oben offen. Begrenzt wird nur die Breite einer Ebene: Wird sie unübersichtlich, sucht man eine echte fachliche Klammer und führt eine Gruppierung ein. Findet sich keine, bleibt die Ebene flach — ein erfundener Zwischenordner behauptet eine Zusammengehörigkeit, die es nicht gibt.
 
 ## Ordner ohne Baustein
 
