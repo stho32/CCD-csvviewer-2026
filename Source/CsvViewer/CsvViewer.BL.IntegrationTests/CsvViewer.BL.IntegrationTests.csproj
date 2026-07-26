@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CsvViewer.BL\CsvViewer.BL.csproj" />
-    <ProjectReference Include="..\CsvViewer\CsvViewer.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\CsvViewer\CsvViewer.csproj" />
   </ItemGroup>
 
 </Project>

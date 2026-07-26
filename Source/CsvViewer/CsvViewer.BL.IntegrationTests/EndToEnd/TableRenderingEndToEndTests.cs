@@ -1,8 +1,8 @@
 using CsvViewer.BL.Common;
 using CsvViewer.BL.Csv;
 using CsvViewer.BL.IntegrationTests.TestFiles;
-using CsvViewer.BL.IO;
 using CsvViewer.BL.Rendering;
+using CsvViewer.HostSpecific.IO;
 
 namespace CsvViewer.BL.IntegrationTests.EndToEnd;
 

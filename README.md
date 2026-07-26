@@ -22,10 +22,11 @@ Source/CsvViewer/
   CsvViewer.sln
   CsvViewer/                       # Entry Point (Composition Root)
     Program.cs
-    HostSpecific/                  # Adapter an die echte Konsole
+    HostSpecific/                  # Adapter an Konsole und Dateisystem
   CsvViewer.BL/                    # Business Logic
     CommandLineArguments/          # positionales Argument-Parsing
     Csv/                           # Datenmodell und Parser
+    IO/                            # Vertraege fuer Datei- und Konsolenzugriff
     Paging/                        # Aufteilen in Seiten
     Navigation/                    # Tastenzuordnung und Seitenindex
     Rendering/                     # Tabellen-Rendering

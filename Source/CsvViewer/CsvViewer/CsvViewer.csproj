@@ -11,4 +11,8 @@
   <ItemGroup>
     <ProjectReference Include="..\CsvViewer.BL\CsvViewer.BL.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- Die host-spezifischen Adapter sind internal; die Integrationstests pruefen sie direkt. -->
+    <InternalsVisibleTo Include="CsvViewer.BL.IntegrationTests" />
+  </ItemGroup>
 </Project>

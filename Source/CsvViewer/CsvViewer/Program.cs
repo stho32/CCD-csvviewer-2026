@@ -24,7 +24,7 @@ internal class Program
             return 1;
         }
 
-        var fileReader = new FileReader();
+        IFileReader fileReader = new FileReader();
         Result<IReadOnlyList<string>> readResult =
             fileReader.ReadLines(argumentsResult.Value!.FilePath);
         if (!readResult.IsSuccess)

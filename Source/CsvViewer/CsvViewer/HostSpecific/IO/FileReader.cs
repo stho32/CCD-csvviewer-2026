@@ -1,9 +1,14 @@
 using System.Text;
 using CsvViewer.BL.Common;
+using CsvViewer.BL.IO;
 
-namespace CsvViewer.BL.IO;
+namespace CsvViewer.HostSpecific.IO;
 
-public sealed class FileReader : IFileReader
+/// <summary>
+/// Adapter an das Dateisystem. Übersetzt die I/O-Fehler von <see cref="File"/> in
+/// Fehler-<see cref="Result{T}"/>, damit über die Layer-Grenze keine Exception fliegt.
+/// </summary>
+internal sealed class FileReader : IFileReader
 {
     public Result<IReadOnlyList<string>> ReadLines(string path)
     {

@@ -1,6 +1,6 @@
 using System.Text;
 using CsvViewer.BL.Common;
-using CsvViewer.BL.IO;
+using CsvViewer.HostSpecific.IO;
 
 namespace CsvViewer.BL.IntegrationTests.IO;
 

@@ -10,7 +10,7 @@ Layered CLI-Tool-Architektur: Entry Point -> BL (Business Logic).
 Referenz: `.claude/app-architectures/dotnet-cli-tool/ARCHITECTURE.md`.
 
 - **CsvViewer** — Einstiegspunkt: Composition Root (`Program.cs`) plus die host-spezifischen
-  Adapter unter `HostSpecific/` (`SystemConsole`, `ConsoleLogger`)
+  Adapter unter `HostSpecific/` (`FileReader`, `SystemConsole`, `ConsoleLogger`)
 - **CsvViewer.BL** — Geschaeftslogik: Argument-Parsing, CSV-Parsing, Paging, Navigation,
   Rendering, interaktiver Loop, Validierung, IO- und Logging-Interfaces
 - **CsvViewer.BL.Tests** — Unit-Tests (NUnit), hand-written Mocks
