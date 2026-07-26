@@ -34,6 +34,8 @@ Besteht aus:
   Bedienung — Lässt den Anwender durch die Seiten blättern.
 - **1.6** [`Program.cs`](Dokumentation/Architektur/A00006-komposition.md)
   Komposition — Verdrahtet die Komponenten zu einem lauffähigen Programm.
+- ✕ [Seiten-Darstellung](Dokumentation/Architektur/A00004-seiten-darstellung.md)
+  *Veraltet* — aufgegangen in **1.3** und **1.4**.
 
 Zwei dieser Schnitte sind Korrekturen aus dem Modellieren selbst: **1.1** stand ursprünglich unter **1.2**, obwohl die Seitengröße gar nicht dorthin fließt. Und **1.3** und **1.4** lagen in einem gemeinsamen Ordner „Seiten-Darstellung", obwohl sie einander nicht kennen — der Renderer nimmt nicht einmal das Ergebnis der Aufteilung entgegen.
 
