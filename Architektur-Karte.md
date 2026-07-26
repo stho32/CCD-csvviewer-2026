@@ -78,15 +78,28 @@ Besteht aus:
 
 ## Kontext
 
+Der Viewer ist kein Dienst, der auf Anfragen wartet, sondern ein Programm mit Anfang und Ende. Deshalb sind Start und Ende eigene Ereignisse — dazwischen liegt ein Zyklus, der beliebig oft durchlaufen wird oder gar nicht.
+
 ```mermaid
 flowchart TB
+  Start(["Start<br/><i>csvviewer datei.csv [seitengröße]</i>"])
+  Anwender(["Anwender am Terminal"])
+  FS[("Dateisystem")]
+  Ende(["Ende<br/><i>Exit-Code</i>"])
+
   subgraph S["CsvViewer"]
-    A00002["CsvViewer/<br/><i>.NET 10, Konsolenprozess</i>"]
+    App["CsvViewer/<br/><i>.NET 10, Konsolenprozess</i>"]
   end
-  Anwender(["Anwender am Terminal"]) -- "Dateipfad, Seitengröße, Tastendrücke" --> A00002
-  A00002 -- "Tabelle, Menü, Exit-Code" --> Anwender
-  A00002 -- "liest CSV" --> FS[("Dateisystem")]
+
+  Start -- "1 · Dateipfad, Seitengröße" --> App
+  App -- "2 · liest CSV, einmalig" --> FS
+  App -- "3 · Tabelle + Menü zeichnen" --> Anwender
+  Anwender -- "4 · Tastendruck" --> App
+  App -- "5a · nach E) — Exit 0" --> Ende
+  App -- "5b · Argument- oder Dateifehler — Exit ≠ 0" --> Ende
 ```
+
+Schritt 3 und 4 bilden den Zyklus: Nach jedem Tastendruck wird die Konsole geleert und neu gezeichnet. Bei **5b** wird er nie betreten — ungültige Argumente oder eine fehlerhafte Datei beenden das Programm, bevor die erste Tabelle erscheint.
 
 ## Datenfluss
 
