@@ -2,7 +2,7 @@
 id: R00003
 title: "Interaktiver Viewer (Paging, Navigation, Composition Root)"
 type: Feature
-status: In Arbeit
+status: Erledigt
 created: 2026-07-01
 ---
 
@@ -56,7 +56,7 @@ Given/When/Then-Szenarien: siehe [user-stories/R00003.md](user-stories/R00003.md
 
 ## Status
 
-- [x] In Arbeit
+- [x] Erledigt
 
 ## Technische Details
 

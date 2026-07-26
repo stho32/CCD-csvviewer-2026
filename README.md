@@ -64,6 +64,15 @@ Im Viewer navigiert ein einzelner Tastendruck (ohne Enter, Gross-/Kleinschreibun
 `F)irst page, P)revious page, N)ext page, L)ast page, E)xit`. An den Raendern klemmt die
 Navigation, ungueltige Tasten werden ignoriert.
 
+Ist die Eingabe umgeleitet, liest der Viewer die Tastenfolge aus dem Strom — ein Zeichen
+je Tastendruck. Damit laesst er sich ohne Terminal steuern, was die E2E-Tests nutzen:
+
+```bash
+printf 'nne' | dotnet run --project Source/CsvViewer/CsvViewer/CsvViewer.csproj -- daten.csv 5
+```
+
+Endet die Eingabe ohne `E`, meldet der Viewer den Abbruch und beendet mit Exit-Code != 0.
+
 ## Anforderungen
 
 Siehe [Anforderungen/](./Anforderungen/). Neue Anforderung via `/erstelle-anforderung`.
