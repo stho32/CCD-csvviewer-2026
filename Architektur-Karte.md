@@ -12,13 +12,13 @@ Das System ist ein einzelner Konsolenprozess ohne Netzwerk, ohne Datenbank und o
 
 Innen ist es nach Wirkungsart geschichtet: reine Operationen rechnen, Adapter berühren die Außenwelt, und ein Composition Root verdrahtet beides. Fehler wandern als `Result`-Objekte nach oben statt als Exceptions — nur `Program` übersetzt sie in Exit-Codes.
 
-14 Bausteine, 4 Ebenen. Der Linktitel ist der Name im Code, die Folgezeile nennt die fachliche Bezeichnung.
+14 Bausteine, davon einer veraltet. Der Linktitel ist der Name im Code, die Folgezeile nennt die fachliche Bezeichnung.
 
 ## 1. `CsvViewer/`
 
 CsvViewer CLI — Stellt den CSV-Viewer als einzeln startbaren Konsolenprozess bereit.
 
-Der Schnitt folgt dem Weg der Daten: erst verstehen was verlangt wurde, dann das Dokument beschaffen, daraus Seiten formen und den Anwender blättern lassen. Die Verdrahtung steht bewusst daneben statt darüber.
+Der Schnitt folgt dem Weg der Daten: verstehen was verlangt wurde, das Dokument beschaffen, es portionieren, eine Portion als Text formen, den Anwender blättern lassen. Die Verdrahtung steht daneben statt darüber.
 
 Besteht aus:
 
@@ -26,14 +26,16 @@ Besteht aus:
   Kommandozeilen-Interpretation — Übersetzt die Prozessargumente in validierte Viewer-Parameter.
 - **1.2** [`DocumentAcquisition/`](Dokumentation/Architektur/A00003-dokument-beschaffung.md)
   Dokument-Beschaffung — Macht aus einem Dateipfad ein geprüftes CSV-Dokument.
-- **1.3** [`PagePresentation/`](Dokumentation/Architektur/A00004-seiten-darstellung.md)
-  Seiten-Darstellung — Macht aus einem CSV-Dokument die sichtbare Seitenansicht.
-- **1.4** [`Interaction/`](Dokumentation/Architektur/A00005-bedienung.md)
+- **1.3** [`Pagination/`](Dokumentation/Architektur/A00010-seiten-aufteilung.md)
+  Seiten-Aufteilung — Zerlegt die Datensätze eines CSV-Dokuments in Seiten fester Größe.
+- **1.4** [`TableRendering/`](Dokumentation/Architektur/A00011-tabellen-rendering.md)
+  Tabellen-Rendering — Formt eine Seite in eine ausgerichtete Texttabelle.
+- **1.5** [`Interaction/`](Dokumentation/Architektur/A00005-bedienung.md)
   Bedienung — Lässt den Anwender durch die Seiten blättern.
-- **1.5** [`Program.cs`](Dokumentation/Architektur/A00006-komposition.md)
+- **1.6** [`Program.cs`](Dokumentation/Architektur/A00006-komposition.md)
   Komposition — Verdrahtet die Komponenten zu einem lauffähigen Programm.
 
-Die Kommandozeilen-Interpretation steht **vor** der Dokument-Beschaffung, nicht in ihr: Sie liefert zwei Werte, die auseinanderlaufen — der Dateipfad speist **1.2**, die Seitengröße **1.3**.
+Zwei dieser Schnitte sind Korrekturen aus dem Modellieren selbst: **1.1** stand ursprünglich unter **1.2**, obwohl die Seitengröße gar nicht dorthin fließt. Und **1.3** und **1.4** lagen in einem gemeinsamen Ordner „Seiten-Darstellung", obwohl sie einander nicht kennen — der Renderer nimmt nicht einmal das Ergebnis der Aufteilung entgegen.
 
 ## 1.2 `DocumentAcquisition/`
 
@@ -48,20 +50,7 @@ Besteht aus:
 - **1.2.2** [`CsvParser`](Dokumentation/Architektur/A00009-csv-interpretation.md)
   CSV-Interpretation — Interpretiert Textzeilen als Kopfzeile mit zugehörigen Datensätzen.
 
-## 1.3 `PagePresentation/`
-
-Seiten-Darstellung — Macht aus einem CSV-Dokument die sichtbare Seitenansicht.
-
-Zwei Schritte zu verschiedenen Zeitpunkten: Die Aufteilung läuft einmalig beim Start, das Rendering bei jedem Zeichenvorgang erneut — deshalb kann dieselbe Spalte auf verschiedenen Seiten unterschiedlich breit sein.
-
-Besteht aus:
-
-- **1.3.1** [`Paginator`](Dokumentation/Architektur/A00010-seiten-aufteilung.md)
-  Seiten-Aufteilung — Zerlegt die Datensätze eines CSV-Dokuments in Seiten fester Größe.
-- **1.3.2** [`TableRenderer`](Dokumentation/Architektur/A00011-tabellen-rendering.md)
-  Tabellen-Rendering — Formt eine Seite in eine ausgerichtete Texttabelle.
-
-## 1.4 `Interaction/`
+## 1.5 `Interaction/`
 
 Bedienung — Lässt den Anwender durch die Seiten blättern.
 
@@ -69,11 +58,11 @@ Der Ablauf liegt in der Geschäftslogik, nicht im Entry Point — nur so ist der
 
 Besteht aus:
 
-- **1.4.1** [`PageNavigator`](Dokumentation/Architektur/A00012-navigations-steuerung.md)
+- **1.5.1** [`PageNavigator`](Dokumentation/Architektur/A00012-navigations-steuerung.md)
   Navigations-Steuerung — Bestimmt aus einem Tastendruck den nächsten Seitenindex.
-- **1.4.2** [`InteractiveViewer`](Dokumentation/Architektur/A00013-viewer-ablauf.md)
+- **1.5.2** [`InteractiveViewer`](Dokumentation/Architektur/A00013-viewer-ablauf.md)
   Viewer-Ablauf — Hält den interaktiven Zyklus am Laufen, bis der Anwender beendet.
-- **1.4.3** [`SystemConsole`](Dokumentation/Architektur/A00014-konsolen-anbindung.md)
+- **1.5.3** [`SystemConsole`](Dokumentation/Architektur/A00014-konsolen-anbindung.md)
   Konsolen-Anbindung — Verbindet den Viewer mit dem echten Terminal.
 
 ## Kontext
@@ -103,7 +92,7 @@ Schritt 3 und 4 bilden den Zyklus: Nach jedem Tastendruck wird die Konsole gelee
 
 ## Datenfluss
 
-Der Ablauf zerfällt in zwei Phasen mit unterschiedlichem Takt: Die Schritte 1–5 laufen **genau einmal** beim Start, Schritt 6 wiederholt sich bei **jedem Tastendruck**. Jeder Startschritt kann mit einem Fehler-`Result` abbrechen — dann endet das Programm, ohne dass der Zyklus je beginnt.
+Der Ablauf zerfällt in zwei Phasen mit unterschiedlichem Takt: Die Schritte 1–4 laufen **genau einmal** beim Start, die Schritte 5 und 6 wiederholen sich bei **jedem Tastendruck**. Jeder Startschritt kann mit einem Fehler-`Result` abbrechen — dann endet das Programm, ohne dass der Zyklus je beginnt.
 
 ```mermaid
 flowchart TB
@@ -111,42 +100,55 @@ flowchart TB
   Prog["Program.cs<br/><i>Composition Root</i>"]
   CLI["CommandLineInterpretation/"]
   DOC["DocumentAcquisition/"]
-  PAGE["PagePresentation/"]
+  PAG["Pagination/"]
+  REN["TableRendering/"]
   INT["Interaction/"]
   Ende(["Ende<br/><i>Exit-Code</i>"])
 
   Start -- "args[]" --> Prog
   Prog -- "1 · Argumente" --> CLI
   CLI -- "2 · Dateipfad" --> DOC
-  CLI -- "3 · Seitengröße" --> PAGE
-  DOC -- "4 · CSV-Dokument" --> PAGE
-  PAGE -- "5 · aufgeteilte Seiten" --> INT
-  INT <-- "6 · je Tastendruck: Seite rendern" --> PAGE
-  INT -- "7 · Ergebnis des Ablaufs" --> Prog
+  CLI -- "3 · Seitengröße" --> PAG
+  DOC -- "4 · CSV-Dokument" --> PAG
+  PAG -- "5 · aufgeteilte Seiten" --> INT
+  INT -- "6 · Seite rendern, je Tastendruck" --> REN
+  REN -- "7 · Tabellentext" --> INT
+  INT -- "8 · Ergebnis des Ablaufs" --> Prog
   Prog -- "Exit 0 oder ≠ 0" --> Ende
 
   CLI -. "Fehler-Result" .-> Prog
   DOC -. "Fehler-Result" .-> Prog
-  PAGE -. "Fehler-Result" .-> Prog
+  PAG -. "Fehler-Result" .-> Prog
 ```
 
 | Phase | Schritte | Takt |
 |---|---|---|
 | Start | 1–5 | einmalig, streng nacheinander |
-| Betrieb | 6 | je Tastendruck, beliebig oft — oder nie |
-| Ende | 7 | einmalig |
+| Betrieb | 6–7 | je Tastendruck, beliebig oft — oder nie |
+| Ende | 8 | einmalig |
 
-`PagePresentation/` erscheint in beiden Phasen, weil seine beiden Teile verschieden takten: Die [Seiten-Aufteilung](Dokumentation/Architektur/A00010-seiten-aufteilung.md) läuft einmalig in Schritt 5, das [Tabellen-Rendering](Dokumentation/Architektur/A00011-tabellen-rendering.md) bei jedem Zeichenvorgang in Schritt 6. Das ist der Grund, warum dieselbe Spalte auf verschiedenen Seiten unterschiedlich breit sein kann.
+Die Trennung von `Pagination/` und `TableRendering/` wird hier sichtbar: Die Aufteilung läuft in Schritt 5 genau einmal, das Rendern in Schritt 6 bei jedem Zeichenvorgang. Daher kann dieselbe Spalte auf verschiedenen Seiten unterschiedlich breit sein.
 
 Die gestrichelten Kanten sind kein eigener Kontrollfluss, sondern das `Result`-Muster: Jeder Schritt gibt Erfolg oder Fehler an den Composition Root zurück, und nur dieser übersetzt ihn in einen Exit-Code.
 
-## Ordner ohne Baustein
+## Ablage innerhalb eines Topics
 
-Zwei Ordner in `CsvViewer.BL/` entsprechen bewusst keinem Baustein:
+Jedes Topic hat genau **einen** Typ auf oberster Ebene — den Einstiegspunkt, dessen Methode von außerhalb gerufen wird. Alles Weitere liegt eine Stufe tiefer:
+
+```
+Topic/
+  <Einstiegspunkt>.cs    allein oben
+  Data/                  Datentypen des Topics
+  Operations/            Helfer, die nur der Einstieg nutzt
+```
+
+Einzige Ausnahme ist `TableRendering/`, das `ITableRenderer` und `TableRenderer` nebeneinander hält — Vertrag und einzige Umsetzung zu trennen würde nichts sichtbar machen.
+
+## Ordner ohne Baustein
 
 | Ordner | Warum |
 |---|---|
-| `HostContracts/` | Bündelt die Verträge, die der Host erfüllt (`IConsole`, `IFileReader`, `ILogger`) — eine Ablage nach Wirkungsart. Fachlich gehört `IFileReader` zu **1.2.1**, `IConsole` zu **1.4.3** |
+| `HostContracts/` | Bündelt die Verträge, die der Host erfüllt (`IConsole`, `IFileReader`, `ILogger`) — eine Ablage nach Wirkungsart. Fachlich gehört `IFileReader` zu **1.2.1**, `IConsole` zu **1.5.3** |
 | `Common/` | Enthält mit `Result` eine Regel statt einer Verantwortung |
 
 ## Reifegrad
@@ -158,8 +160,9 @@ Zwei Ordner in `CsvViewer.BL/` entsprechen bewusst keinem Baustein:
 | Komponente | 12 | 12 | 0 | 0 |
 
 ```
-Ohne eigenen Abschnitt: 1.1, 1.5 und alle Blätter — bewusst, dort ist die Substanz erschöpft
+Veraltet: A00004 Seiten-Darstellung — aufgegangen in 1.3 und 1.4 (R00008)
+Ohne eigenen Abschnitt: 1.1, 1.3, 1.4, 1.6 und alle Blätter — dort ist die Substanz erschöpft
 Offene Fragen gesamt: 3  (A00001: 1, A00002: 2)
-Bausteine ohne Quellen: keine
+Bausteine ohne Quellen: A00004 (veraltet, planmässig)
 Quellen-Pfade, die nicht mehr existieren: keine
 ```

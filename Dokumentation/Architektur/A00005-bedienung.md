@@ -35,7 +35,7 @@ Innere Struktur — drei Rollen:
 2. [Viewer-Ablauf](A00013-viewer-ablauf.md) — treibt den Zyklus
 3. [Konsolen-Anbindung](A00014-konsolen-anbindung.md) — der Draht zum echten Terminal
 
-Ruft [Seiten-Darstellung](A00004-seiten-darstellung.md) zum Zeichnen auf.
+Ruft [Seiten-Aufteilung](A00010-seiten-aufteilung.md) zum Zeichnen auf.
 
 ## Entscheidungen
 

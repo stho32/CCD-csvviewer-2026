@@ -2,7 +2,7 @@
 id: R00008
 title: "Ein Topic, ein Einstiegspunkt — PagePresentation auftrennen, Innenleben absenken"
 type: Refactoring
-status: Neu
+status: Erledigt
 created: 2026-07-26
 ---
 
@@ -72,30 +72,30 @@ Given/When/Then-Szenarien: siehe [user-stories/R00008.md](user-stories/R00008.md
 ## Akzeptanzkriterien
 
 ### Auftrennung
-- [ ] `PagePresentation/` existiert nicht mehr
-- [ ] `Pagination/` enthält `Paginator.cs` und `Data/` mit `PagedDocument`, `CsvPageCollection`
-- [ ] `TableRendering/` enthält `ITableRenderer.cs` und `TableRenderer.cs`
+- [x] `PagePresentation/` existiert nicht mehr
+- [x] `Pagination/` enthält `Paginator.cs` und `Data/` mit `PagedDocument`, `CsvPageCollection`
+- [x] `TableRendering/` enthält `ITableRenderer.cs` und `TableRenderer.cs`
 
 ### Ablage
-- [ ] `Interaction/` enthält oben nur `InteractiveViewer.cs`
-- [ ] `Interaction/Operations/` enthält `NavigationCommandMapper` und `PageNavigator`
-- [ ] `Interaction/Data/` enthält `NavigationCommand`
-- [ ] `CommandLineInterpretation/Data/` enthält `ViewerArguments`
-- [ ] Jedes Topic hat genau einen Typ auf oberster Ebene — Ausnahme `TableRendering/` mit Vertrag plus Umsetzung
+- [x] `Interaction/` enthält oben nur `InteractiveViewer.cs`
+- [x] `Interaction/Operations/` enthält `NavigationCommandMapper` und `PageNavigator`
+- [x] `Interaction/Data/` enthält `NavigationCommand`
+- [x] `CommandLineInterpretation/Data/` enthält `ViewerArguments`
+- [x] Jedes Topic hat genau einen Typ auf oberster Ebene — Ausnahme `TableRendering/` mit Vertrag plus Umsetzung
 
 ### Namespaces
-- [ ] Namespace folgt dem Ordner, auch bei `Operations/`
-- [ ] Alle `using`-Direktiven in BL, Entry Point und beiden Testprojekten sind angepasst
-- [ ] Eine Klasse pro Datei bleibt gewahrt
+- [x] Namespace folgt dem Ordner, auch bei `Operations/`
+- [x] Alle `using`-Direktiven in BL, Entry Point und beiden Testprojekten sind angepasst
+- [x] Eine Klasse pro Datei bleibt gewahrt
 
 ### Verhalten
-- [ ] Keine Signatur, kein Verhalten und keine Ausgabe ändert sich
-- [ ] Alle 92 Tests laufen unverändert durch
-- [ ] Build ohne Warnungen
+- [x] Keine Signatur, kein Verhalten und keine Ausgabe ändert sich
+- [x] Alle 92 Tests laufen unverändert durch
+- [x] Build ohne Warnungen
 
 ## Status
 
-- [ ] Neu
+- [x] Erledigt
 
 ## Abhängigkeiten
 

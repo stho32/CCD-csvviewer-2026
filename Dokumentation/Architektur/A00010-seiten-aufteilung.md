@@ -1,16 +1,14 @@
 ---
 id: A00010
 name: Seiten-Aufteilung
-code: Paginator
+code: Pagination/
 ebene: Komponente
-eltern: A00004
+eltern: A00002
 repo:
 status: Aktiv
 herkunft: code
 quellen:
-  - Source/CsvViewer/CsvViewer.BL/PagePresentation/Paginator.cs
-  - Source/CsvViewer/CsvViewer.BL/PagePresentation/PagedDocument.cs
-  - Source/CsvViewer/CsvViewer.BL/PagePresentation/CsvPageCollection.cs
+  - Source/CsvViewer/CsvViewer.BL/Pagination/
 verwandt: [A00007, A00012]
 domaene: [D00002]
 ---

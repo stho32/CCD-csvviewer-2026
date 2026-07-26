@@ -47,29 +47,36 @@ Jeder Schritt liefert `Result<T>`; beim ersten Fehler bricht `Program` ab und bi
 
 ## Abhaengigkeiten
 
-**Innere Struktur** — fünf Komponenten, zwei davon weiter zerlegt:
+**Innere Struktur** — sechs Komponenten, zwei davon weiter zerlegt:
 
 | Komponente | Frage, die sie beantwortet |
 |---|---|
 | [Kommandozeilen-Interpretation](A00007-kommandozeilen-interpretation.md) | Was hat der Anwender überhaupt verlangt? |
 | [Dokument-Beschaffung](A00003-dokument-beschaffung.md) | Wie kommt die Datei ins Programm? |
-| [Seiten-Darstellung](A00004-seiten-darstellung.md) | Wie wird daraus ein Bild? |
+| [Seiten-Aufteilung](A00010-seiten-aufteilung.md) | Wie wird die Datenmenge portioniert? |
+| [Tabellen-Rendering](A00011-tabellen-rendering.md) | Wie sieht eine Portion als Text aus? |
 | [Bedienung](A00005-bedienung.md) | Wie steuert der Mensch das? |
 | [Komposition](A00006-komposition.md) | Wer steckt alles zusammen? |
 
-Die Kommandozeilen-Interpretation steht bewusst **vor** der Dokument-Beschaffung statt in ihr: Sie liefert zwei Werte, die in verschiedene Richtungen fliessen — der Dateipfad speist die Dokument-Beschaffung, die Seitengrösse die Seiten-Aufteilung ([R00006](../../Anforderungen/R00006-kommandozeilen-interpretation-trennen.md)).
+Zwei Schnitte sind das Ergebnis von Korrekturen, die beim Modellieren auffielen:
 
-`Komposition` ist reine Technik ohne fachliche Entsprechung.
+- Die Kommandozeilen-Interpretation steht **vor** der Dokument-Beschaffung statt in ihr. Sie liefert zwei Werte, die auseinanderlaufen — der Dateipfad speist die Dokument-Beschaffung, die Seitengrösse die Seiten-Aufteilung ([R00006](../../Anforderungen/R00006-kommandozeilen-interpretation-trennen.md)).
+- Seiten-Aufteilung und Tabellen-Rendering sind **getrennt**, obwohl beide „mit Seiten zu tun haben". Sie kennen einander nicht, haben verschiedene Aufrufer und laufen in verschiedenen Phasen; der Renderer nimmt nicht einmal das Ergebnis der Aufteilung entgegen ([R00008](../../Anforderungen/R00008-ein-topic-ein-einstiegspunkt.md)). Der frühere Sammelbaustein [Seiten-Darstellung](A00004-seiten-darstellung.md) steht auf `Veraltet`.
 
-**Modell und Ordnerstruktur** — seit [R00005](../../Anforderungen/R00005-ordnerstruktur-nach-architektur.md) tragen die Ordner der Geschäftslogik die englische Entsprechung der Bausteinnamen:
+Sechs Komponenten liegen über der Faustregel „drei bis fünf" — bewusst in Kauf genommen, weil sechs klar geschnittene Topics besser sind als fünf, von denen eines zwei Dinge vermischt. `Komposition` ist dabei reine Technik ohne fachliche Entsprechung.
+
+**Modell und Ordnerstruktur** — die Ordner der Geschäftslogik tragen die englische Entsprechung der Bausteinnamen:
 
 | Baustein | Ordner |
 |---|---|
 | Kommandozeilen-Interpretation | `CommandLineInterpretation/` |
 | Dokument-Beschaffung | `DocumentAcquisition/` |
-| Seiten-Darstellung | `PagePresentation/` |
+| Seiten-Aufteilung | `Pagination/` |
+| Tabellen-Rendering | `TableRendering/` |
 | Bedienung | `Interaction/` |
 | Komposition | `Program.cs` im Entry Point |
+
+**Ablage innerhalb eines Topics** — jedes Topic hat genau einen Typ auf oberster Ebene, nämlich den Einstiegspunkt; darunter liegen `Data/` für Datentypen und `Operations/` für Helfer, die nur der Einstieg nutzt ([R00007](../../Anforderungen/R00007-datenobjekte-in-data-unterordner.md), [R00008](../../Anforderungen/R00008-ein-topic-ein-einstiegspunkt.md)). Einzige Ausnahme ist `TableRendering/`, das Vertrag und Umsetzung nebeneinander hält.
 
 Zwei Ordner entsprechen bewusst **keinem** Baustein: `HostContracts/` bündelt die Verträge, die der Host erfüllt (`IConsole`, `IFileReader`, `ILogger`), und `Common/` enthält mit `Result` eine Regel statt einer Verantwortung. Beide folgen der Wirkungsart, während das Modell dem Datenfluss folgt — fachlich gehört `IFileReader` weiterhin zu [Datei-Zugriff](A00008-datei-zugriff.md), `IConsole` zu [Konsolen-Anbindung](A00014-konsolen-anbindung.md).
 

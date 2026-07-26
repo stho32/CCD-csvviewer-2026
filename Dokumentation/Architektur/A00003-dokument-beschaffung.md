@@ -33,7 +33,7 @@ Innere Struktur — zwei Schritte in fester Reihenfolge:
 1. [Datei-Zugriff](A00008-datei-zugriff.md) — Zeilen von der Platte holen
 2. [CSV-Interpretation](A00009-csv-interpretation.md) — Zeilen als Kopfzeile plus Datensätze deuten
 
-Extern: Dateisystem (lesend). Weiter gereicht wird das Ergebnis an [Seiten-Darstellung](A00004-seiten-darstellung.md).
+Extern: Dateisystem (lesend). Weiter gereicht wird das Ergebnis an [Seiten-Aufteilung](A00010-seiten-aufteilung.md).
 
 ## Entscheidungen
 

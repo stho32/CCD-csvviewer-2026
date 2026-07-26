@@ -9,10 +9,7 @@ status: Aktiv
 herkunft: code
 quellen:
   - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/CsvParser.cs
-  - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/CsvDocument.cs
-  - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/CsvHeader.cs
-  - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/CsvRow.cs
-  - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/CsvRowCollection.cs
+  - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/Data/
 verwandt: [A00008]
 domaene: [D00001]
 ---

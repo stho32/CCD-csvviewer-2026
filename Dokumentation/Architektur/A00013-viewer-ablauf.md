@@ -9,6 +9,7 @@ status: Aktiv
 herkunft: code
 quellen:
   - Source/CsvViewer/CsvViewer.BL/Interaction/InteractiveViewer.cs
+  - Source/CsvViewer/CsvViewer.BL/Interaction/Data/
 verwandt: [A00011, A00012, A00014]
 domaene: [D00004]
 ---

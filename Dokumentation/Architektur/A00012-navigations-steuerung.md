@@ -8,9 +8,7 @@ repo:
 status: Aktiv
 herkunft: code
 quellen:
-  - Source/CsvViewer/CsvViewer.BL/Interaction/NavigationCommand.cs
-  - Source/CsvViewer/CsvViewer.BL/Interaction/NavigationCommandMapper.cs
-  - Source/CsvViewer/CsvViewer.BL/Interaction/PageNavigator.cs
+  - Source/CsvViewer/CsvViewer.BL/Interaction/Operations/
 verwandt: [A00010]
 domaene: [D00004]
 ---

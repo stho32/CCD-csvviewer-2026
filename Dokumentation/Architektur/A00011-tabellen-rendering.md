@@ -1,15 +1,14 @@
 ---
 id: A00011
 name: Tabellen-Rendering
-code: TableRenderer
+code: TableRendering/
 ebene: Komponente
-eltern: A00004
+eltern: A00002
 repo:
 status: Aktiv
 herkunft: code
 quellen:
-  - Source/CsvViewer/CsvViewer.BL/PagePresentation/ITableRenderer.cs
-  - Source/CsvViewer/CsvViewer.BL/PagePresentation/TableRenderer.cs
+  - Source/CsvViewer/CsvViewer.BL/TableRendering/
 verwandt: [A00013]
 domaene: [D00003]
 ---
