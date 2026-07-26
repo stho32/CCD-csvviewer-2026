@@ -166,7 +166,8 @@ Die Zahl der Topics ist nach oben offen. Begrenzt wird nur die Breite einer Eben
 
 ```
 Ohne eigenen Abschnitt: 1.1, 1.3, 1.4, 1.6 und alle Blätter — dort ist die Substanz erschöpft
-Offene Fragen gesamt: 3  (A00001: 1, A00002: 2)
+Offene Fragen gesamt: keine
 Bausteine ohne Quellen: keine
 Quellen-Pfade, die nicht mehr existieren: keine
+Nicht modelliert (bewusst): Common/, HostContracts/
 ```

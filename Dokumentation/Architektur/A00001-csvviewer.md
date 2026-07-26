@@ -57,7 +57,7 @@ Es existieren keine ADRs unter `Dokumentation/ADRs/`. Die tragenden Entscheidung
 
 ## Offene Fragen
 
-- Die Wiederverwendbarkeit der Geschäftslogik (`FileReader` ist bewusst CSV-agnostisch, R00001) ist **kein** verbindliches Architekturziel — ein Folgekurs „CSV Viewer II" ist nicht geplant, aber auch nicht ausgeschlossen. Falls er kommt, ist neu zu bewerten, ob die BL als eigenständig konsumierbare Bibliothek gepflegt werden soll.
+Keine.
 
 ## Notizen / Quellen
 
@@ -69,6 +69,8 @@ Es existieren keine ADRs unter `Dokumentation/ADRs/`. Die tragenden Entscheidung
 - Ein Test ist plattformbedingt übersprungen (Unix-Dateirechte unter Windows nicht prüfbar).
 
 **Fachliches Vokabular** — die Begriffe des Systems sind separat modelliert: [CSV-Dokument](../Domaenenwissen/D00001-csv-dokument.md), [Seiten-Modell](../Domaenenwissen/D00002-seiten-modell.md), [Tabellen-Ausgabeformat](../Domaenenwissen/D00003-tabellen-ausgabeformat.md), [Navigationsmenü](../Domaenenwissen/D00004-navigationsmenue.md).
+
+**Merkposten** — die Wiederverwendbarkeit der Geschäftslogik (`FileReader` ist bewusst CSV-agnostisch, R00001) ist **kein** verbindliches Architekturziel. Kommt ein Folgekurs „CSV Viewer II", ist neu zu bewerten, ob die BL als eigenständig konsumierbare Bibliothek gepflegt werden soll.
 
 **Aus dem Dialog bestätigt** (`herkunft: dialog`, 2026-07-26):
 

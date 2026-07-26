@@ -46,9 +46,11 @@ Terminal beziehungsweise die Standard-Datenströme. Wird ausschliesslich über d
 
 Die Adapter liegen unter `HostSpecific/`, damit host-spezifische Eigenheiten nicht in die Geschäftslogik sickern.
 
+Der Terminal-Pfad von `ReadKey()` bleibt bewusst ohne automatisierten Test. Die E2E-Tests fahren ausschliesslich über den Strom-Pfad; der Terminal-Zweig ist eine einzelne Abfrage (`Console.IsInputRedirected`) und wird bei jedem manuellen Start über `testlauf.sh` durchlaufen. Ein Pseudo-Terminal im Test (ConPTY-Interop) wäre rund 150 Zeilen P/Invoke und damit selbst fehleranfällige Infrastruktur — der Aufwand steht nicht im Verhältnis zum abgedeckten Risiko.
+
 ## Offene Fragen
 
-- Der Terminal-Pfad von `ReadKey()` (echtes TTY) ist nicht automatisiert abgedeckt; die E2E-Tests fahren ausschliesslich über den Strom-Pfad. So belassen oder ein Pseudo-Terminal im Test aufbauen?
+Keine.
 
 ## Notizen / Quellen
 

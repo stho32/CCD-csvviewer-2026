@@ -101,11 +101,11 @@ Zwei Ordner entsprechen bewusst **keinem** Baustein und stehen deshalb im Frontm
 - `InteractiveViewer` liegt bewusst in der BL statt im Entry Point, damit der Loop testbar bleibt — [R00003](../../Anforderungen/R00003-interaktiver-viewer.md).
 - Die Konsolen-Adapter liegen unter `HostSpecific/` im Entry-Point-Projekt, damit host-spezifische Eigenheiten nicht in die BL sickern.
 - Bei umgeleiteten Kanälen weicht `SystemConsole` aus: `ReadKey()` liest zeichenweise aus dem Strom, `Clear()` wird zum No-op. Damit ist der Viewer ohne Terminal steuerbar (`printf 'nne' | csvviewer datei.csv`), was die E2E-Tests plattformunabhängig macht.
+- `PublishSingleFile` und `SelfContained` bleiben im csproj stehen, obwohl heute nur über `dotnet run` gestartet wird. Sie sind bewusst als Option erhalten, falls das Werkzeug doch einmal als einzelne EXE verteilt werden soll.
 
 ## Offene Fragen
 
-- `CsvViewer.csproj` setzt `PublishSingleFile` und `SelfContained`, obwohl das Werkzeug laut Dialog nicht verteilt, sondern nur über `dotnet run` gestartet wird. Beides ist damit wirkungsloser Scaffolding-Rest — entfernen oder als Option belassen?
-- Der Terminal-Pfad von `SystemConsole.ReadKey()` (echtes TTY) ist nicht automatisiert abgedeckt; die E2E-Tests nutzen ausschliesslich den Strom-Pfad. Soll das so bleiben oder rechtfertigt es ConPTY-Interop im Test?
+Keine.
 
 ## Notizen / Quellen
 
