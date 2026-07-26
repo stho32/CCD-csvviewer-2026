@@ -1,4 +1,6 @@
 using CsvViewer.BL.Common;
+using CsvViewer.BL.Interaction.Data;
+using CsvViewer.BL.Interaction.Operations;
 using CsvViewer.BL.Interaction;
 
 namespace CsvViewer.BL.Tests.Navigation;

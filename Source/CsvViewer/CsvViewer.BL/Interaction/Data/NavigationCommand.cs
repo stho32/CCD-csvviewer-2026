@@ -1,4 +1,4 @@
-namespace CsvViewer.BL.Interaction;
+namespace CsvViewer.BL.Interaction.Data;
 
 public enum NavigationCommand
 {

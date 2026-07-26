@@ -1,6 +1,6 @@
 using CsvViewer.BL.DocumentAcquisition.Data;
 using CsvViewer.BL.DocumentAcquisition;
-using CsvViewer.BL.PagePresentation;
+using CsvViewer.BL.TableRendering;
 
 namespace CsvViewer.BL.Tests.Rendering;
 

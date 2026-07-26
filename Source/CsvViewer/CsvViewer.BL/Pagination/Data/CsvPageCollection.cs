@@ -1,7 +1,7 @@
 using CsvViewer.BL.DocumentAcquisition.Data;
 using CsvViewer.BL.DocumentAcquisition;
 
-namespace CsvViewer.BL.PagePresentation.Data;
+namespace CsvViewer.BL.Pagination.Data;
 
 public class CsvPageCollection
 {

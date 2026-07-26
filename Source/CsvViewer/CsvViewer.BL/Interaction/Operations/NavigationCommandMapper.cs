@@ -1,6 +1,7 @@
 using CsvViewer.BL.Common;
+using CsvViewer.BL.Interaction.Data;
 
-namespace CsvViewer.BL.Interaction;
+namespace CsvViewer.BL.Interaction.Operations;
 
 public static class NavigationCommandMapper
 {
