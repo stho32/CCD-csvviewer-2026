@@ -131,12 +131,13 @@ Die gestrichelten Kanten sind kein eigener Kontrollfluss, sondern das `Result`-M
 
 ## Ablage-Regeln
 
-Es gibt zwei Sorten von Ordnern, unterschieden an einem nachzählbaren Merkmal — der Zahl der **Einstiegspunkte**, also der Typen, deren Methoden von außerhalb des Ordners gerufen werden. Datentypen zählen nicht mit.
+Ordner werden an einem nachzählbaren Merkmal unterschieden — der Zahl der **Einstiegspunkte**, also der Typen, deren Methoden von außerhalb des Ordners gerufen werden. Datentypen zählen nicht mit.
 
-| Sorte | Einstiegspunkte | Inhalt |
-|---|---|---|
-| **Topic** | genau einer | Einstieg oben, darunter `Data/` und `Operations/` |
-| **Gruppierung** | keiner | ausschließlich Topics oder weitere Gruppierungen |
+| Sorte | Einstiegspunkte | Inhalt | hier |
+|---|---|---|---|
+| **Topic** | genau einer | Einstieg oben, darunter `Data/` und `Operations/` | die sechs fachlichen Ordner |
+| **Gruppierung** | keiner | ausschließlich Topics oder weitere Gruppierungen | kommt nicht vor |
+| **Vertragssammlung** | mehrere, aber keine Umsetzung | ausschließlich Verträge, deren Implementierungen woanders liegen | `HostContracts/` |
 
 ```
 Topic/
@@ -145,7 +146,7 @@ Topic/
   Operations/            Helfer, die nur der Einstieg nutzt
 ```
 
-Alle sechs Ordner dieses Projekts sind Topics; eine Gruppierung kommt hier nicht vor. Einzige Ausnahme von der Ein-Datei-Regel ist `TableRendering/`, das `ITableRenderer` und `TableRenderer` nebeneinander hält — Vertrag und einzige Umsetzung zu trennen würde nichts sichtbar machen.
+Einzige Ausnahme von der Ein-Datei-Regel ist `TableRendering/`, das `ITableRenderer` und `TableRenderer` nebeneinander hält — Vertrag und einzige Umsetzung zu trennen würde nichts sichtbar machen.
 
 Die Zahl der Topics ist nach oben offen. Begrenzt wird nur die Breite einer Ebene: Wird sie unübersichtlich, sucht man eine echte fachliche Klammer und führt eine Gruppierung ein. Findet sich keine, bleibt die Ebene flach — ein erfundener Zwischenordner behauptet eine Zusammengehörigkeit, die es nicht gibt.
 
