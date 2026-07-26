@@ -12,7 +12,7 @@ Das System ist ein einzelner Konsolenprozess ohne Netzwerk, ohne Datenbank und o
 
 Innen ist es nach Wirkungsart geschichtet: reine Operationen rechnen, Adapter berühren die Außenwelt, und ein Composition Root verdrahtet beides. Fehler wandern als `Result`-Objekte nach oben statt als Exceptions — nur `Program` übersetzt sie in Exit-Codes.
 
-14 Bausteine, davon einer veraltet. Der Linktitel ist der Name im Code, die Folgezeile nennt die fachliche Bezeichnung.
+13 aktive Bausteine. Der Linktitel ist der Name im Code, die Folgezeile nennt die fachliche Bezeichnung.
 
 ## 1. `CsvViewer/`
 
@@ -34,10 +34,6 @@ Besteht aus:
   Bedienung — Lässt den Anwender durch die Seiten blättern.
 - **1.6** [`Program.cs`](Dokumentation/Architektur/A00006-komposition.md)
   Komposition — Verdrahtet die Komponenten zu einem lauffähigen Programm.
-- ✕ [Seiten-Darstellung](Dokumentation/Architektur/A00004-seiten-darstellung.md)
-  *Veraltet* — aufgegangen in **1.3** und **1.4**.
-
-Zwei dieser Schnitte sind Korrekturen aus dem Modellieren selbst: **1.1** stand ursprünglich unter **1.2**, obwohl die Seitengröße gar nicht dorthin fließt. Und **1.3** und **1.4** lagen in einem gemeinsamen Ordner „Seiten-Darstellung", obwohl sie einander nicht kennen — der Renderer nimmt nicht einmal das Ergebnis der Aufteilung entgegen.
 
 ## 1.2 `DocumentAcquisition/`
 
@@ -166,12 +162,11 @@ Die Zahl der Topics ist nach oben offen. Begrenzt wird nur die Breite einer Eben
 |---|---|---|---|---|
 | System | 1 | 1 | 0 | 0 |
 | Container | 1 | 1 | 0 | 0 |
-| Komponente | 12 | 12 | 0 | 0 |
+| Komponente | 11 | 11 | 0 | 0 |
 
 ```
-Veraltet: A00004 Seiten-Darstellung — aufgegangen in 1.3 und 1.4 (R00008)
 Ohne eigenen Abschnitt: 1.1, 1.3, 1.4, 1.6 und alle Blätter — dort ist die Substanz erschöpft
 Offene Fragen gesamt: 3  (A00001: 1, A00002: 2)
-Bausteine ohne Quellen: A00004 (veraltet, planmässig)
+Bausteine ohne Quellen: keine
 Quellen-Pfade, die nicht mehr existieren: keine
 ```
