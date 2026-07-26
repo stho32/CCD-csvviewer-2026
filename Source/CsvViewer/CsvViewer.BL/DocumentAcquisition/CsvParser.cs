@@ -1,4 +1,5 @@
 using CsvViewer.BL.Common;
+using CsvViewer.BL.DocumentAcquisition.Data;
 
 namespace CsvViewer.BL.DocumentAcquisition;
 

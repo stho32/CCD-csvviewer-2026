@@ -1,7 +1,9 @@
 using CsvViewer.BL.Common;
+using CsvViewer.BL.DocumentAcquisition.Data;
 using CsvViewer.BL.DocumentAcquisition;
 using CsvViewer.BL.HostContracts;
 using CsvViewer.BL.Interaction;
+using CsvViewer.BL.PagePresentation.Data;
 using CsvViewer.BL.PagePresentation;
 
 namespace CsvViewer.BL.Interaction;

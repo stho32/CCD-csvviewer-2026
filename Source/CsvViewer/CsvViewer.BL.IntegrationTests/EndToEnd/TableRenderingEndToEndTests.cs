@@ -1,4 +1,5 @@
 using CsvViewer.BL.Common;
+using CsvViewer.BL.DocumentAcquisition.Data;
 using CsvViewer.BL.DocumentAcquisition;
 using CsvViewer.BL.IntegrationTests.TestFiles;
 using CsvViewer.BL.PagePresentation;

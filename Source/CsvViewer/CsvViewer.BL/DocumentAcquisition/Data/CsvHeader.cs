@@ -1,4 +1,4 @@
-namespace CsvViewer.BL.DocumentAcquisition;
+namespace CsvViewer.BL.DocumentAcquisition.Data;
 
 public class CsvHeader
 {

@@ -1,4 +1,4 @@
-namespace CsvViewer.BL.DocumentAcquisition;
+namespace CsvViewer.BL.DocumentAcquisition.Data;
 
 /// <summary>Ein Datensatz einer CSV-Datei: Feldwerte positionsbasiert in Kopfzeilen-Reihenfolge.</summary>
 public class CsvRow
