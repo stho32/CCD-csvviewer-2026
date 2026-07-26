@@ -1,6 +1,7 @@
 ---
 id: A00007
 name: Kommandozeilen-Interpretation
+code: CommandLineInterpretation/
 ebene: Komponente
 eltern: A00002
 repo:

@@ -1,6 +1,7 @@
 ---
 id: A00004
 name: Seiten-Darstellung
+code: PagePresentation/
 ebene: Komponente
 eltern: A00002
 repo:

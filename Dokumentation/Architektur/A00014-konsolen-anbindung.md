@@ -1,6 +1,7 @@
 ---
 id: A00014
 name: Konsolen-Anbindung
+code: SystemConsole
 ebene: Komponente
 eltern: A00005
 repo:

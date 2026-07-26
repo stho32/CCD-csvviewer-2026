@@ -1,6 +1,7 @@
 ---
 id: A00001
 name: CsvViewer
+code: CsvViewer.sln
 ebene: System
 eltern:
 repo:

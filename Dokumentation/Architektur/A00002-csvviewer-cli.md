@@ -1,6 +1,7 @@
 ---
 id: A00002
 name: CsvViewer CLI
+code: CsvViewer/
 ebene: Container
 eltern: A00001
 repo:

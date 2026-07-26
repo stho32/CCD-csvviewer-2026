@@ -1,6 +1,7 @@
 ---
 id: A00005
 name: Bedienung
+code: Interaction/
 ebene: Komponente
 eltern: A00002
 repo:

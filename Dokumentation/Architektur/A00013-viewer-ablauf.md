@@ -1,6 +1,7 @@
 ---
 id: A00013
 name: Viewer-Ablauf
+code: InteractiveViewer
 ebene: Komponente
 eltern: A00005
 repo:

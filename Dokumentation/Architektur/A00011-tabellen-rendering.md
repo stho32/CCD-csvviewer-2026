@@ -1,6 +1,7 @@
 ---
 id: A00011
 name: Tabellen-Rendering
+code: TableRenderer
 ebene: Komponente
 eltern: A00004
 repo:

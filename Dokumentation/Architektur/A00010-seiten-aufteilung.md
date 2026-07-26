@@ -1,6 +1,7 @@
 ---
 id: A00010
 name: Seiten-Aufteilung
+code: Paginator
 ebene: Komponente
 eltern: A00004
 repo:

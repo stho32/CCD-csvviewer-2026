@@ -1,6 +1,7 @@
 ---
 id: A00006
 name: Komposition
+code: Program.cs
 ebene: Komponente
 eltern: A00002
 repo:

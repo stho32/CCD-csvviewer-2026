@@ -1,6 +1,7 @@
 ---
 id: A00008
 name: Datei-Zugriff
+code: FileReader
 ebene: Komponente
 eltern: A00003
 repo:

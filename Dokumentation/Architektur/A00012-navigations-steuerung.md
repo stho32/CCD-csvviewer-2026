@@ -1,6 +1,7 @@
 ---
 id: A00012
 name: Navigations-Steuerung
+code: PageNavigator
 ebene: Komponente
 eltern: A00005
 repo:

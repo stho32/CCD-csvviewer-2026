@@ -1,6 +1,7 @@
 ---
 id: A00009
 name: CSV-Interpretation
+code: CsvParser
 ebene: Komponente
 eltern: A00003
 repo:

@@ -1,6 +1,7 @@
 ---
 id: A00003
 name: Dokument-Beschaffung
+code: DocumentAcquisition/
 ebene: Komponente
 eltern: A00002
 repo:
