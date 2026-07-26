@@ -2,7 +2,7 @@
 id: R00007
 title: "Datenobjekte in Data-Unterordner, damit der Einstiegspunkt sichtbar bleibt"
 type: Refactoring
-status: Neu
+status: Erledigt
 created: 2026-07-26
 ---
 
@@ -65,25 +65,25 @@ Given/When/Then-Szenarien: siehe [user-stories/R00007.md](user-stories/R00007.md
 ## Akzeptanzkriterien
 
 ### Struktur
-- [ ] `DocumentAcquisition/` enthält oben nur noch `CsvParser.cs`
-- [ ] `DocumentAcquisition/Data/` enthält `CsvDocument`, `CsvHeader`, `CsvRow`, `CsvRowCollection`
-- [ ] `PagePresentation/Data/` enthält `PagedDocument` und `CsvPageCollection`
-- [ ] `Interaction/` und `CommandLineInterpretation/` bleiben unverändert — je nur ein Datenobjekt
-- [ ] Kein `Data/`-Ordner enthält einen Typ mit Logik
+- [x] `DocumentAcquisition/` enthält oben nur noch `CsvParser.cs`
+- [x] `DocumentAcquisition/Data/` enthält `CsvDocument`, `CsvHeader`, `CsvRow`, `CsvRowCollection`
+- [x] `PagePresentation/Data/` enthält `PagedDocument` und `CsvPageCollection`
+- [x] `Interaction/` und `CommandLineInterpretation/` bleiben unverändert — je nur ein Datenobjekt
+- [x] Kein `Data/`-Ordner enthält einen Typ mit Logik
 
 ### Namespaces
-- [ ] Namespace folgt weiterhin dem Ordner: `CsvViewer.BL.DocumentAcquisition.Data`, `CsvViewer.BL.PagePresentation.Data`
-- [ ] Alle `using`-Direktiven in BL, Entry Point und beiden Testprojekten sind angepasst
-- [ ] Eine Klasse pro Datei bleibt gewahrt
+- [x] Namespace folgt weiterhin dem Ordner: `CsvViewer.BL.DocumentAcquisition.Data`, `CsvViewer.BL.PagePresentation.Data`
+- [x] Alle `using`-Direktiven in BL, Entry Point und beiden Testprojekten sind angepasst
+- [x] Eine Klasse pro Datei bleibt gewahrt
 
 ### Verhalten
-- [ ] Keine Signatur, kein Verhalten und keine Ausgabe ändert sich
-- [ ] Alle 92 Tests laufen unverändert durch
-- [ ] Build ohne Warnungen
+- [x] Keine Signatur, kein Verhalten und keine Ausgabe ändert sich
+- [x] Alle 92 Tests laufen unverändert durch
+- [x] Build ohne Warnungen
 
 ## Status
 
-- [ ] Neu
+- [x] Erledigt
 
 ## Abhängigkeiten
 
