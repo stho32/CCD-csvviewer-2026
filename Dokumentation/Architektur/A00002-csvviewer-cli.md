@@ -10,6 +10,9 @@ herkunft: code
 quellen:
   - Source/CsvViewer/CsvViewer/
   - Source/CsvViewer/CsvViewer.BL/
+ausgenommen:
+  - Source/CsvViewer/CsvViewer.BL/Common/
+  - Source/CsvViewer/CsvViewer.BL/HostContracts/
 verwandt: [A00001]
 domaene: [D00001, D00002, D00003, D00004]
 ---
@@ -67,7 +70,7 @@ Sechs Komponenten sind hier kein Kompromiss, sondern das richtige Ergebnis. Die 
 
 `Komposition` ist dabei reine Technik ohne fachliche Entsprechung.
 
-**Topic oder Gruppierung** — jeder dieser sechs Ordner ist ein *Topic*: Er hat genau einen Einstiegspunkt, also einen Typ, dessen Methode von aussen gerufen wird. Ein *Gruppierungs*-Ordner hätte keinen und dürfte ausschliesslich weitere Topics enthalten. In diesem Projekt kommt keine Gruppierung vor; erst bei deutlich mehr Topics mit echter gemeinsamer Klammer wäre eine sinnvoll.
+**Ordnersorten** — jeder dieser sechs Ordner ist ein *Topic*: Er hat genau einen Einstiegspunkt, also einen Typ, dessen Methode von aussen gerufen wird. Eine *Gruppierung* hätte keinen und dürfte ausschliesslich weitere Topics enthalten — die kommt hier nicht vor und wäre erst bei deutlich mehr Topics mit echter gemeinsamer Klammer sinnvoll. `HostContracts/` ist eine *Vertragssammlung*: mehrere Einstiegspunkte, aber keine einzige Umsetzung.
 
 **Modell und Ordnerstruktur** — die Ordner der Geschäftslogik tragen die englische Entsprechung der Bausteinnamen:
 
@@ -82,7 +85,7 @@ Sechs Komponenten sind hier kein Kompromiss, sondern das richtige Ergebnis. Die 
 
 **Ablage innerhalb eines Topics** — jedes Topic hat genau einen Typ auf oberster Ebene, nämlich den Einstiegspunkt; darunter liegen `Data/` für Datentypen und `Operations/` für Helfer, die nur der Einstieg nutzt ([R00007](../../Anforderungen/R00007-datenobjekte-in-data-unterordner.md), [R00008](../../Anforderungen/R00008-ein-topic-ein-einstiegspunkt.md)). Einzige Ausnahme ist `TableRendering/`, das Vertrag und Umsetzung nebeneinander hält.
 
-Zwei Ordner entsprechen bewusst **keinem** Baustein: `HostContracts/` bündelt die Verträge, die der Host erfüllt (`IConsole`, `IFileReader`, `ILogger`), und `Common/` enthält mit `Result` eine Regel statt einer Verantwortung. Beide folgen der Wirkungsart, während das Modell dem Datenfluss folgt — fachlich gehört `IFileReader` weiterhin zu [Datei-Zugriff](A00008-datei-zugriff.md), `IConsole` zu [Konsolen-Anbindung](A00014-konsolen-anbindung.md).
+Zwei Ordner entsprechen bewusst **keinem** Baustein und stehen deshalb im Frontmatter unter `ausgenommen`: `HostContracts/` bündelt die Verträge, die der Host erfüllt (`IConsole`, `IFileReader`, `ILogger`), und `Common/` enthält mit `Result` eine Regel statt einer Verantwortung. Beide folgen der Wirkungsart, während das Modell dem Datenfluss folgt — fachlich gehört `IFileReader` weiterhin zu [Datei-Zugriff](A00008-datei-zugriff.md), `IConsole` zu [Konsolen-Anbindung](A00014-konsolen-anbindung.md).
 
 **Extern**
 
