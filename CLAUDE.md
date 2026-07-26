@@ -41,3 +41,11 @@ Verzeichnis `Anforderungen/`, Format `RNNNNN-slug.md`. Neue Anforderung via `/er
 
 Verzeichnis `Dokumentation/Domaenenwissen/`, Format `DNNNNN-slug.md`, Sprache `de`.
 Pflege via `/domaenenwissen <subbefehl>`.
+
+## Architektur-Modell
+
+Ueberblick: [Architektur-Karte.md](./Architektur-Karte.md) — stufenweise vom Ganzen
+bis zu den Komponenten. Generiert, nicht von Hand pflegen.
+
+Bausteine unter `Dokumentation/Architektur/`, Format `ANNNNN-slug.md`.
+Pflege via `/architektur <subbefehl>`.
