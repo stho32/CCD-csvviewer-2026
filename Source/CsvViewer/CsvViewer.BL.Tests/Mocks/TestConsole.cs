@@ -1,5 +1,5 @@
 using CsvViewer.BL.Common;
-using CsvViewer.BL.IO;
+using CsvViewer.BL.HostContracts;
 
 namespace CsvViewer.BL.Tests.Mocks;
 

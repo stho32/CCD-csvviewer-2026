@@ -1,11 +1,8 @@
-using CsvViewer.BL.CommandLineArguments;
 using CsvViewer.BL.Common;
-using CsvViewer.BL.Csv;
-using CsvViewer.BL.IO;
-using CsvViewer.BL.Logging;
-using CsvViewer.BL.Paging;
-using CsvViewer.BL.Rendering;
-using CsvViewer.BL.Viewer;
+using CsvViewer.BL.DocumentAcquisition;
+using CsvViewer.BL.HostContracts;
+using CsvViewer.BL.Interaction;
+using CsvViewer.BL.PagePresentation;
 using CsvViewer.HostSpecific.IO;
 using CsvViewer.HostSpecific.Logging;
 

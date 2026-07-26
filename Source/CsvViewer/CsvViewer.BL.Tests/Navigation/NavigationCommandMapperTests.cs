@@ -1,5 +1,5 @@
 using CsvViewer.BL.Common;
-using CsvViewer.BL.Navigation;
+using CsvViewer.BL.Interaction;
 
 namespace CsvViewer.BL.Tests.Navigation;
 

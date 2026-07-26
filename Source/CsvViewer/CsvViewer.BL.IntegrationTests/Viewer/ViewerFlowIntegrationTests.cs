@@ -1,12 +1,10 @@
 using System.Text;
-using CsvViewer.BL.CommandLineArguments;
 using CsvViewer.BL.Common;
-using CsvViewer.BL.Csv;
+using CsvViewer.BL.DocumentAcquisition;
 using CsvViewer.BL.IntegrationTests.Mocks;
 using CsvViewer.BL.IntegrationTests.TestFiles;
-using CsvViewer.BL.Paging;
-using CsvViewer.BL.Rendering;
-using CsvViewer.BL.Viewer;
+using CsvViewer.BL.Interaction;
+using CsvViewer.BL.PagePresentation;
 using CsvViewer.HostSpecific.IO;
 
 namespace CsvViewer.BL.IntegrationTests.Viewer;

@@ -1,5 +1,5 @@
 using CsvViewer.BL.Common;
-using CsvViewer.BL.Logging;
+using CsvViewer.BL.HostContracts;
 
 namespace CsvViewer.HostSpecific.Logging;
 

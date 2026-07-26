@@ -1,0 +1,11 @@
+using CsvViewer.BL.Common;
+
+namespace CsvViewer.BL.HostContracts;
+
+public interface IFileReader
+{
+    /// <summary>
+    /// Liest als UTF-8; Fehler kommen als Fehler-Result zurück, nie als Exception.
+    /// </summary>
+    Result<IReadOnlyList<string>> ReadLines(string path);
+}

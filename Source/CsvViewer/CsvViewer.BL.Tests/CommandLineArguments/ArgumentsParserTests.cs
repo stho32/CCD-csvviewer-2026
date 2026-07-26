@@ -1,5 +1,5 @@
-using CsvViewer.BL.CommandLineArguments;
 using CsvViewer.BL.Common;
+using CsvViewer.BL.DocumentAcquisition;
 
 namespace CsvViewer.BL.Tests.CommandLineArguments;
 

@@ -1,6 +1,6 @@
 using CsvViewer.BL.Common;
-using CsvViewer.BL.Csv;
-using CsvViewer.BL.Rendering;
+using CsvViewer.BL.DocumentAcquisition;
+using CsvViewer.BL.PagePresentation;
 
 namespace CsvViewer.BL.Tests.Mocks;
 
