@@ -103,20 +103,42 @@ Schritt 3 und 4 bilden den Zyklus: Nach jedem Tastendruck wird die Konsole gelee
 
 ## Datenfluss
 
+Der Ablauf zerfällt in zwei Phasen mit unterschiedlichem Takt: Die Schritte 1–5 laufen **genau einmal** beim Start, Schritt 6 wiederholt sich bei **jedem Tastendruck**. Jeder Startschritt kann mit einem Fehler-`Result` abbrechen — dann endet das Programm, ohne dass der Zyklus je beginnt.
+
 ```mermaid
-flowchart LR
-  A00007["CommandLineInterpretation/"]
-  A00003["DocumentAcquisition/"]
-  A00004["PagePresentation/"]
-  A00005["Interaction/"]
-  A00006["Program.cs"]
-  A00006 -- "startet" --> A00007
-  A00007 -- "Dateipfad" --> A00003
-  A00007 -- "Seitengröße" --> A00004
-  A00003 -- "CSV-Dokument" --> A00004
-  A00004 -- "gerenderte Seite" --> A00005
-  A00005 -- "Exit-Ergebnis" --> A00006
+flowchart TB
+  Start(["Start"])
+  Prog["Program.cs<br/><i>Composition Root</i>"]
+  CLI["CommandLineInterpretation/"]
+  DOC["DocumentAcquisition/"]
+  PAGE["PagePresentation/"]
+  INT["Interaction/"]
+  Ende(["Ende<br/><i>Exit-Code</i>"])
+
+  Start -- "args[]" --> Prog
+  Prog -- "1 · Argumente" --> CLI
+  CLI -- "2 · Dateipfad" --> DOC
+  CLI -- "3 · Seitengröße" --> PAGE
+  DOC -- "4 · CSV-Dokument" --> PAGE
+  PAGE -- "5 · aufgeteilte Seiten" --> INT
+  INT <-- "6 · je Tastendruck: Seite rendern" --> PAGE
+  INT -- "7 · Ergebnis des Ablaufs" --> Prog
+  Prog -- "Exit 0 oder ≠ 0" --> Ende
+
+  CLI -. "Fehler-Result" .-> Prog
+  DOC -. "Fehler-Result" .-> Prog
+  PAGE -. "Fehler-Result" .-> Prog
 ```
+
+| Phase | Schritte | Takt |
+|---|---|---|
+| Start | 1–5 | einmalig, streng nacheinander |
+| Betrieb | 6 | je Tastendruck, beliebig oft — oder nie |
+| Ende | 7 | einmalig |
+
+`PagePresentation/` erscheint in beiden Phasen, weil seine beiden Teile verschieden takten: Die [Seiten-Aufteilung](Dokumentation/Architektur/A00010-seiten-aufteilung.md) läuft einmalig in Schritt 5, das [Tabellen-Rendering](Dokumentation/Architektur/A00011-tabellen-rendering.md) bei jedem Zeichenvorgang in Schritt 6. Das ist der Grund, warum dieselbe Spalte auf verschiedenen Seiten unterschiedlich breit sein kann.
+
+Die gestrichelten Kanten sind kein eigener Kontrollfluss, sondern das `Result`-Muster: Jeder Schritt gibt Erfolg oder Fehler an den Composition Root zurück, und nur dieser übersetzt ihn in einen Exit-Code.
 
 ## Ordner ohne Baustein
 
