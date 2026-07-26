@@ -1,0 +1,7 @@
+# Zeilenenden repo-weit auf LF normalisieren. Der Index enthält bereits
+# durchgängig LF — ohne diese Datei wandelt core.autocrlf=true den Working Tree
+# unter Windows nach CRLF und Git warnt bei jeder Änderung.
+* text=auto eol=lf
+
+# Shell-Skripte brauchen zwingend LF, sonst bricht der Shebang.
+*.sh text eol=lf
