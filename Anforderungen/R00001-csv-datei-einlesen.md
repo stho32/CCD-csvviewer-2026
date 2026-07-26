@@ -2,7 +2,7 @@
 id: R00001
 title: "CSV-Datei einlesen (generisches Parsing + Datenmodell)"
 type: Feature
-status: Neu
+status: Erledigt
 created: 2026-07-01
 ---
 
@@ -25,32 +25,32 @@ Given/When/Then-Szenarien: siehe [user-stories/R00001.md](user-stories/R00001.md
 ## Akzeptanzkriterien
 
 ### Einlesen & Format
-- [ ] Datei wird als UTF-8 gelesen
-- [ ] Felder werden am Semikolon `;` getrennt
-- [ ] Erste Zeile wird als Kopfzeile (Spaltennamen) interpretiert
-- [ ] Jede weitere Zeile wird als ein Datensatz interpretiert
-- [ ] Zellinhalte werden unverändert übernommen (kein Quoting/Escaping/Zeilenumbruch-Handling)
+- [x] Datei wird als UTF-8 gelesen
+- [x] Felder werden am Semikolon `;` getrennt
+- [x] Erste Zeile wird als Kopfzeile (Spaltennamen) interpretiert
+- [x] Jede weitere Zeile wird als ein Datensatz interpretiert
+- [x] Zellinhalte werden unverändert übernommen (kein Quoting/Escaping/Zeilenumbruch-Handling)
 
 ### Generische Struktur
-- [ ] Ergebnis besteht aus Kopfzeile + geordneter Datensatzliste
-- [ ] Datensätze behalten die Eingabereihenfolge
-- [ ] Feldwerte sind positionsbasiert in Kopfzeilen-Reihenfolge zugreifbar
-- [ ] Keine Bindung an ein konkretes Fachmodell (keine typgebundene Zeilenklasse)
+- [x] Ergebnis besteht aus Kopfzeile + geordneter Datensatzliste
+- [x] Datensätze behalten die Eingabereihenfolge
+- [x] Feldwerte sind positionsbasiert in Kopfzeilen-Reihenfolge zugreifbar
+- [x] Keine Bindung an ein konkretes Fachmodell (keine typgebundene Zeilenklasse)
 
 ### Validierung & Fehlerfälle
-- [ ] Fehlende/nicht lesbare Datei → Abbruch mit Meldung, kein Weiterverarbeiten
-- [ ] Komplett leere Datei → Abbruch mit Meldung
-- [ ] Nur Kopfzeile (keine Datensätze) → gültiges Ergebnis mit 0 Datensätzen
-- [ ] Datenzeile mit abweichender Feldanzahl zur Kopfzeile → Abbruch mit Meldung
-- [ ] Fehler werden über das Result-Muster signalisiert (keine Exceptions über Bausteingrenzen)
+- [x] Fehlende/nicht lesbare Datei → Abbruch mit Meldung, kein Weiterverarbeiten
+- [x] Komplett leere Datei → Abbruch mit Meldung
+- [x] Nur Kopfzeile (keine Datensätze) → gültiges Ergebnis mit 0 Datensätzen
+- [x] Datenzeile mit abweichender Feldanzahl zur Kopfzeile → Abbruch mit Meldung
+- [x] Fehler werden über das Result-Muster signalisiert (keine Exceptions über Bausteingrenzen)
 
 ### Qualität
-- [ ] Baustein hat keine Konsolen-/UI-Abhängigkeit (reine BL)
-- [ ] Unit-Tests decken alle Format- und Fehlerfälle ab
+- [x] Baustein hat keine Konsolen-/UI-Abhängigkeit (reine BL)
+- [x] Unit-Tests decken alle Format- und Fehlerfälle ab
 
 ## Status
 
-- [ ] Neu
+- [x] Erledigt
 
 ## Technische Details
 

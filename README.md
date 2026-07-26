@@ -7,20 +7,34 @@ CLI-Werkzeug zum Anzeigen von CSV-Dateien.
 | Technologie | Version | Zweck |
 |---|---|---|
 | .NET | 10.0 | Runtime und SDK |
-| CommandLineParser | 2.9.1 | CLI-Argument-Parsing |
 | NUnit | 4.3.2 | Unit- und Integrationstests |
-| coverlet | 6.0.4 | Code-Coverage |
+| NUnit3TestAdapter | 5.0.0 | Test-Discovery |
+| NUnit.Analyzers | 4.7.0 | Statische Analyse der Tests |
+| Microsoft.NET.Test.Sdk | 17.14.0 | Test-Host |
+| coverlet.collector | 6.0.4 | Code-Coverage |
+
+Die CLI-Argumente werden positional und ohne Library geparst (`CsvViewer.BL/CommandLineArguments/ArgumentsParser.cs`).
 
 ## Struktur
 
 ```
 Source/CsvViewer/
   CsvViewer.sln
-  CsvViewer/                       # Entry Point (Console App)
+  CsvViewer/                       # Entry Point (Composition Root)
+    Program.cs
+    HostSpecific/                  # Adapter an die echte Konsole
   CsvViewer.BL/                    # Business Logic
+    CommandLineArguments/          # positionales Argument-Parsing
+    Csv/                           # Datenmodell und Parser
+    Paging/                        # Aufteilen in Seiten
+    Navigation/                    # Tastenzuordnung und Seitenindex
+    Rendering/                     # Tabellen-Rendering
+    Viewer/                        # interaktiver Loop
   CsvViewer.BL.Tests/              # Unit-Tests
-  CsvViewer.BL.IntegrationTests/   # Integrationstests
+  CsvViewer.BL.IntegrationTests/   # Integrations- und E2E-Tests
 Anforderungen/                     # Anforderungs-Dokumente (RNNNNN)
+beispiel.csv                       # Beispieldaten fuer manuelle Erprobung
+testlauf.sh                        # Baut und startet den Viewer mit beispiel.csv
 ```
 
 ## Voraussetzungen
@@ -36,9 +50,19 @@ dotnet build Source/CsvViewer/CsvViewer.sln
 # Tests
 dotnet test Source/CsvViewer/CsvViewer.sln
 
-# Ausfuehren
-dotnet run --project Source/CsvViewer/CsvViewer/CsvViewer.csproj -- --file daten.csv
+# Ausfuehren — erstes Argument = Datei, zweites (optional) = Seitengroesse (Default 10)
+dotnet run --project Source/CsvViewer/CsvViewer/CsvViewer.csproj -- daten.csv
+dotnet run --project Source/CsvViewer/CsvViewer/CsvViewer.csproj -- daten.csv 25
+
+# Manueller Testlauf mit den Beispieldaten
+./testlauf.sh 5
 ```
+
+## Bedienung
+
+Im Viewer navigiert ein einzelner Tastendruck (ohne Enter, Gross-/Kleinschreibung egal):
+`F)irst page, P)revious page, N)ext page, L)ast page, E)xit`. An den Raendern klemmt die
+Navigation, ungueltige Tasten werden ignoriert.
 
 ## Anforderungen
 

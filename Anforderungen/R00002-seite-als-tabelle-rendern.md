@@ -2,7 +2,7 @@
 id: R00002
 title: "Seite als Tabelle rendern (Spaltenbreiten, Rahmen)"
 type: Feature
-status: Neu
+status: Erledigt
 created: 2026-07-01
 ---
 
@@ -35,30 +35,30 @@ Given/When/Then-Szenarien: siehe [user-stories/R00002.md](user-stories/R00002.md
 ## Akzeptanzkriterien
 
 ### Tabellenformat
-- [ ] Kopfzeile wird als erste Ausgabezeile gerendert (Spaltennamen)
-- [ ] Genau eine Trennlinie zwischen Kopf- und Datenzeilen: `-` je Spaltenbreite, `+` an jedem Spaltenende
-- [ ] Jeder Datensatz wird als eine Zeile gerendert
-- [ ] Jede Zelle endet mit `|` (kein führendes/äußeres `|`, keine obere/untere Rahmenlinie)
-- [ ] Werte sind linksbündig, mit Leerzeichen rechts auf Spaltenbreite aufgefüllt, ohne zusätzliche Padding-Leerzeichen um den Inhalt
+- [x] Kopfzeile wird als erste Ausgabezeile gerendert (Spaltennamen)
+- [x] Genau eine Trennlinie zwischen Kopf- und Datenzeilen: `-` je Spaltenbreite, `+` an jedem Spaltenende
+- [x] Jeder Datensatz wird als eine Zeile gerendert
+- [x] Jede Zelle endet mit `|` (kein führendes/äußeres `|`, keine obere/untere Rahmenlinie)
+- [x] Werte sind linksbündig, mit Leerzeichen rechts auf Spaltenbreite aufgefüllt, ohne zusätzliche Padding-Leerzeichen um den Inhalt
 
 ### Spaltenbreiten
-- [ ] Spaltenbreite = längster Wert der Spalte inklusive Spaltenname
-- [ ] Breite wird über genau die übergebenen (Seiten-)Zeilen berechnet, nicht über das Gesamtdokument
-- [ ] Alle `|`-Trenner stehen spaltenweise bündig untereinander
+- [x] Spaltenbreite = längster Wert der Spalte inklusive Spaltenname
+- [x] Breite wird über genau die übergebenen (Seiten-)Zeilen berechnet, nicht über das Gesamtdokument
+- [x] Alle `|`-Trenner stehen spaltenweise bündig untereinander
 
 ### Generik & Sonderfälle
-- [ ] Rendering arbeitet rein positionsbasiert über Header und Feldwerte (kein Fachmodell)
-- [ ] Leere Seite (0 Datensätze) → Ausgabe besteht nur aus Kopfzeile + Trennlinie
-- [ ] Leere Zellwerte werden als reine Auffüll-Leerzeichen dargestellt (Spaltenbreite bleibt erhalten)
+- [x] Rendering arbeitet rein positionsbasiert über Header und Feldwerte (kein Fachmodell)
+- [x] Leere Seite (0 Datensätze) → Ausgabe besteht nur aus Kopfzeile + Trennlinie
+- [x] Leere Zellwerte werden als reine Auffüll-Leerzeichen dargestellt (Spaltenbreite bleibt erhalten)
 
 ### Qualität & Architektur
-- [ ] Baustein ist eine pure Operation: liefert die Tabelle als String, gibt selbst nichts auf der Konsole aus
-- [ ] Keine Konsolen-/UI-Abhängigkeit (reine BL)
-- [ ] Unit-Tests decken Format, Breitenberechnung und Sonderfälle (leere Seite, leere Zellen, unterschiedliche Spaltenzahlen) ab
+- [x] Baustein ist eine pure Operation: liefert die Tabelle als String, gibt selbst nichts auf der Konsole aus
+- [x] Keine Konsolen-/UI-Abhängigkeit (reine BL)
+- [x] Unit-Tests decken Format, Breitenberechnung und Sonderfälle (leere Seite, leere Zellen, unterschiedliche Spaltenzahlen) ab
 
 ## Status
 
-- [ ] Neu
+- [x] Erledigt
 
 ## Technische Details
 

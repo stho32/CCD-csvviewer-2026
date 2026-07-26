@@ -2,7 +2,7 @@
 id: R00003
 title: "Interaktiver Viewer (Paging, Navigation, Composition Root)"
 type: Feature
-status: Neu
+status: In Arbeit
 created: 2026-07-01
 ---
 
@@ -26,37 +26,37 @@ Given/When/Then-Szenarien: siehe [user-stories/R00003.md](user-stories/R00003.md
 ## Akzeptanzkriterien
 
 ### CLI-Argumente
-- [ ] Erstes Argument = Dateipfad (erforderlich)
-- [ ] Zweites Argument = Seitengröße (optional, positive Ganzzahl)
-- [ ] Ohne zweites Argument gilt Default = 10 Datensätze pro Seite
-- [ ] Fehlendes Dateiargument oder mehr als 2 Argumente → Abbruch mit knapper Usage-Meldung, Exit ≠ 0
-- [ ] Nicht-numerische oder ≤ 0 Seitengröße → Abbruch mit Meldung, Exit ≠ 0
+- [x] Erstes Argument = Dateipfad (erforderlich)
+- [x] Zweites Argument = Seitengröße (optional, positive Ganzzahl)
+- [x] Ohne zweites Argument gilt Default = 10 Datensätze pro Seite
+- [x] Fehlendes Dateiargument oder mehr als 2 Argumente → Abbruch mit knapper Usage-Meldung, Exit ≠ 0
+- [x] Nicht-numerische oder ≤ 0 Seitengröße → Abbruch mit Meldung, Exit ≠ 0
 
 ### Paging
-- [ ] Datensätze werden in Seiten à Seitengröße aufgeteilt (letzte Seite ggf. kürzer)
-- [ ] Seitenzahl = ⌈Datensätze / Seitengröße⌉, mindestens 1 Seite
-- [ ] Bei 0 Datensätzen (nur Kopfzeile) wird genau eine Seite mit Kopf + Trennlinie angezeigt
-- [ ] Jede Seite berechnet ihre Spaltenbreiten unabhängig (über den Renderer aus R00002)
+- [x] Datensätze werden in Seiten à Seitengröße aufgeteilt (letzte Seite ggf. kürzer)
+- [x] Seitenzahl = ⌈Datensätze / Seitengröße⌉, mindestens 1 Seite
+- [x] Bei 0 Datensätzen (nur Kopfzeile) wird genau eine Seite mit Kopf + Trennlinie angezeigt
+- [x] Jede Seite berechnet ihre Spaltenbreiten unabhängig (über den Renderer aus R00002)
 
 ### Navigation
-- [ ] Menüzeile `F)irst page, P)revious page, N)ext page, L)ast page, E)xit` wird unter der Tabelle angezeigt
-- [ ] Auswahl per einzelnem Tastendruck ohne Enter, groß-/kleinschreibungs-unabhängig
-- [ ] F → erste, L → letzte, N → nächste, P → vorherige Seite
-- [ ] N auf letzter Seite / P auf erster Seite → bleibt stehen (kein Umlauf)
-- [ ] Ungültige Taste → Eingabe wird ignoriert, Seite unverändert neu gezeichnet
-- [ ] E → Programm endet mit Exit-Code 0
-- [ ] Vor jedem Zeichnen wird die Konsole gelöscht und die aktuelle Seite neu aufgebaut
+- [x] Menüzeile `F)irst page, P)revious page, N)ext page, L)ast page, E)xit` wird unter der Tabelle angezeigt
+- [x] Auswahl per einzelnem Tastendruck ohne Enter, groß-/kleinschreibungs-unabhängig
+- [x] F → erste, L → letzte, N → nächste, P → vorherige Seite
+- [x] N auf letzter Seite / P auf erster Seite → bleibt stehen (kein Umlauf)
+- [x] Ungültige Taste → Eingabe wird ignoriert, Seite unverändert neu gezeichnet
+- [x] E → Programm endet mit Exit-Code 0
+- [x] Vor jedem Zeichnen wird die Konsole gelöscht und die aktuelle Seite neu aufgebaut
 
 ### Architektur & Qualität
-- [ ] `Program` ist Composition Root: verdrahtet `FileReader`, `CsvParser`, Paging und `TableRenderer`
-- [ ] Paging- und Navigations-Logik sind als testbare Operation von der Konsole entkoppelt (`IConsole`-Abstraktion für Ein-/Ausgabe/Clear)
-- [ ] Entry-Point-Projekt enthält keine Geschäftslogik über das Verdrahten hinaus
-- [ ] Unit-Tests decken Paging-Grenzfälle und Navigation (Klemmen, Ignorieren, Exit) mit einer Test-Konsole ab
-- [ ] Integrationstest deckt den Gesamtfluss Datei → Anzeige der ersten Seite ab
+- [x] `Program` ist Composition Root: verdrahtet `FileReader`, `CsvParser`, Paging und `TableRenderer`
+- [x] Paging- und Navigations-Logik sind als testbare Operation von der Konsole entkoppelt (`IConsole`-Abstraktion für Ein-/Ausgabe/Clear)
+- [x] Entry-Point-Projekt enthält keine Geschäftslogik über das Verdrahten hinaus
+- [x] Unit-Tests decken Paging-Grenzfälle und Navigation (Klemmen, Ignorieren, Exit) mit einer Test-Konsole ab
+- [x] Integrationstest deckt den Gesamtfluss Datei → Anzeige der ersten Seite ab
 
 ## Status
 
-- [ ] Neu
+- [x] In Arbeit
 
 ## Technische Details
 

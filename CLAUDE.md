@@ -9,8 +9,10 @@ CsvViewer — CLI-Werkzeug zum Anzeigen von CSV-Dateien.
 Layered CLI-Tool-Architektur: Entry Point -> BL (Business Logic).
 Referenz: `.claude/app-architectures/dotnet-cli-tool/ARCHITECTURE.md`.
 
-- **CsvViewer** — Einstiegspunkt, CLI-Argument-Parsing, Konsolenausgabe
-- **CsvViewer.BL** — Geschaeftslogik, Commands, Validierung, Logging-Interfaces
+- **CsvViewer** — Einstiegspunkt: Composition Root (`Program.cs`) plus die host-spezifischen
+  Adapter unter `HostSpecific/` (`SystemConsole`, `ConsoleLogger`)
+- **CsvViewer.BL** — Geschaeftslogik: Argument-Parsing, CSV-Parsing, Paging, Navigation,
+  Rendering, interaktiver Loop, Validierung, IO- und Logging-Interfaces
 - **CsvViewer.BL.Tests** — Unit-Tests (NUnit), hand-written Mocks
 - **CsvViewer.BL.IntegrationTests** — Integrationstests mit echten Dateien
 
@@ -34,3 +36,8 @@ Referenz: `.claude/app-architectures/dotnet-cli-tool/ARCHITECTURE.md`.
 ## Anforderungen
 
 Verzeichnis `Anforderungen/`, Format `RNNNNN-slug.md`. Neue Anforderung via `/erstelle-anforderung`.
+
+## Domaenenwissen
+
+Verzeichnis `Dokumentation/Domaenenwissen/`, Format `DNNNNN-slug.md`, Sprache `de`.
+Pflege via `/domaenenwissen <subbefehl>`.
