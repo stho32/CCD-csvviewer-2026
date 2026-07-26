@@ -21,19 +21,19 @@ public sealed class InteractiveViewer
         _tableRenderer = tableRenderer;
     }
 
-    public Result Run(CsvPageCollection? pages)
+    public Result Run(PagedDocument? document)
     {
         if (_console is null || _tableRenderer is null)
         {
             return new Result(false, "Die Viewer-Abhängigkeiten fehlen.");
         }
 
-        if (pages is null || pages.PageCount == 0)
+        if (document is null || document.Pages.PageCount == 0)
         {
             return new Result(false, "Der Viewer benötigt mindestens eine Seite.");
         }
 
-        Result<PageNavigator> navigatorResult = PageNavigator.Create(pages.PageCount);
+        Result<PageNavigator> navigatorResult = PageNavigator.Create(document.Pages.PageCount);
         if (!navigatorResult.IsSuccess)
         {
             return new Result(false, navigatorResult.Message);
@@ -44,7 +44,8 @@ public sealed class InteractiveViewer
         while (true)
         {
             Result drawResult = DrawPage(
-                pages[navigator.CurrentPageIndex],
+                document.Header,
+                document.Pages[navigator.CurrentPageIndex],
                 _console,
                 _tableRenderer);
             if (!drawResult.IsSuccess)
@@ -79,7 +80,8 @@ public sealed class InteractiveViewer
     }
 
     private static Result DrawPage(
-        CsvDocument page,
+        CsvHeader header,
+        CsvRowCollection rows,
         IConsole console,
         ITableRenderer tableRenderer)
     {
@@ -89,7 +91,7 @@ public sealed class InteractiveViewer
             return clearResult;
         }
 
-        Result<string> tableResult = tableRenderer.Render(page);
+        Result<string> tableResult = tableRenderer.Render(header, rows);
         if (!tableResult.IsSuccess)
         {
             return new Result(false, tableResult.Message);

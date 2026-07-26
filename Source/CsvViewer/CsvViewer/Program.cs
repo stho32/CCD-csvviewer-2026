@@ -40,16 +40,16 @@ internal class Program
             return 1;
         }
 
-        Result<CsvPageCollection> pagesResult =
+        Result<PagedDocument> pagedResult =
             Paginator.Paginate(parseResult.Value, argumentsResult.Value.PageSize);
-        if (!pagesResult.IsSuccess)
+        if (!pagedResult.IsSuccess)
         {
-            logger.Error(pagesResult.Message);
+            logger.Error(pagedResult.Message);
             return 1;
         }
 
         var viewer = new InteractiveViewer(new SystemConsole(), new TableRenderer());
-        Result viewerResult = viewer.Run(pagesResult.Value);
+        Result viewerResult = viewer.Run(pagedResult.Value);
         if (!viewerResult.IsSuccess)
         {
             logger.Error(viewerResult.Message);

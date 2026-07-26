@@ -13,7 +13,7 @@ public class InteractiveViewerTests
     public void Wenn_NextNextPreviousGedruecktWird_dann_ErwarteteSeitenWerdenNeuGezeichnet()
     {
         // Arrange
-        CsvPageCollection pages = CreatePages("eins", "zwei", "drei");
+        PagedDocument pages = CreatePages("eins", "zwei", "drei");
         var console = new TestConsole('N', 'N', 'P', 'E');
         var viewer = new InteractiveViewer(console, new TableRenderer());
 
@@ -35,7 +35,7 @@ public class InteractiveViewerTests
     public void Wenn_UngueltigeTasteGedruecktWird_dann_DieselbeSeiteWirdNeuGezeichnet()
     {
         // Arrange
-        CsvPageCollection pages = CreatePages("eins", "zwei");
+        PagedDocument pages = CreatePages("eins", "zwei");
         var console = new TestConsole('?', 'E');
         var viewer = new InteractiveViewer(console, new TableRenderer());
 
@@ -53,7 +53,7 @@ public class InteractiveViewerTests
     public void Wenn_KleinGeschriebenesLastFirstExitGedruecktWird_dann_BefehleWerdenAusgefuehrt()
     {
         // Arrange
-        CsvPageCollection pages = CreatePages("eins", "zwei", "drei");
+        PagedDocument pages = CreatePages("eins", "zwei", "drei");
         var console = new TestConsole('l', 'f', 'e');
         var viewer = new InteractiveViewer(console, new TableRenderer());
 
@@ -70,7 +70,7 @@ public class InteractiveViewerTests
     public void Wenn_ExitSofortGedruecktWird_dann_NurErsteSeiteWirdGezeichnet()
     {
         // Arrange
-        CsvPageCollection pages = CreatePages("eins", "zwei");
+        PagedDocument pages = CreatePages("eins", "zwei");
         var console = new TestConsole('E');
         var viewer = new InteractiveViewer(console, new TableRenderer());
 
@@ -94,7 +94,8 @@ public class InteractiveViewerTests
         var viewer = new InteractiveViewer(console, new TableRenderer());
 
         // Act
-        Result result = viewer.Run(new CsvPageCollection(Array.Empty<CsvDocument>()));
+        Result result = viewer.Run(
+            new PagedDocument(new CsvHeader(["Seite"]), new CsvPageCollection([])));
 
         // Assert
         Assert.That(result.IsSuccess, Is.False);
@@ -212,13 +213,12 @@ public class InteractiveViewerTests
         Assert.That(console.ReadCount, Is.Zero);
     }
 
-    private static CsvPageCollection CreatePages(params string[] values)
+    private static PagedDocument CreatePages(params string[] values)
     {
-        return new CsvPageCollection(
-            values.Select(
-                value => new CsvDocument(
-                    new CsvHeader(["Seite"]),
-                    new CsvRowCollection([new CsvRow([value])]))));
+        return new PagedDocument(
+            new CsvHeader(["Seite"]),
+            new CsvPageCollection(
+                values.Select(value => new CsvRowCollection([new CsvRow([value])]))));
     }
 
     private static void AssertPageSequence(

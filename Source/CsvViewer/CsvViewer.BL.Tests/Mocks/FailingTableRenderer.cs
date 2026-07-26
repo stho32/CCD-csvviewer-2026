@@ -8,7 +8,7 @@ internal sealed class FailingTableRenderer : ITableRenderer
 {
     public int RenderCount { get; private set; }
 
-    public Result<string> Render(CsvDocument? page)
+    public Result<string> Render(CsvHeader? header, CsvRowCollection? rows)
     {
         RenderCount++;
         return new Result<string>(null, false, "Testfehler beim Rendern.");

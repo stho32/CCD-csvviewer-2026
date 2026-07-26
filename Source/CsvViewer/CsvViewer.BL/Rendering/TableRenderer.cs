@@ -6,24 +6,24 @@ namespace CsvViewer.BL.Rendering;
 
 public sealed class TableRenderer : ITableRenderer
 {
-    public Result<string> Render(CsvDocument? page)
+    public Result<string> Render(CsvHeader? header, CsvRowCollection? rows)
     {
-        if (page is null)
+        if (header is null || rows is null)
         {
             return new Result<string>(null, false, "Die zu rendernde Seite fehlt.");
         }
 
-        int[] columnWidths = CalculateColumnWidths(page);
-        var lines = new string[page.Rows.RowCount + 2];
+        int[] columnWidths = CalculateColumnWidths(header, rows);
+        var lines = new string[rows.RowCount + 2];
 
         lines[0] = BuildValueLine(
             columnWidths,
-            columnIndex => page.Header[columnIndex]);
+            columnIndex => header[columnIndex]);
         lines[1] = BuildSeparatorLine(columnWidths);
 
-        for (int rowIndex = 0; rowIndex < page.Rows.RowCount; rowIndex++)
+        for (int rowIndex = 0; rowIndex < rows.RowCount; rowIndex++)
         {
-            CsvRow row = page.Rows[rowIndex];
+            CsvRow row = rows[rowIndex];
             lines[rowIndex + 2] = BuildValueLine(
                 columnWidths,
                 columnIndex => row[columnIndex]);
@@ -35,19 +35,19 @@ public sealed class TableRenderer : ITableRenderer
             string.Empty);
     }
 
-    private static int[] CalculateColumnWidths(CsvDocument page)
+    private static int[] CalculateColumnWidths(CsvHeader header, CsvRowCollection rows)
     {
-        var columnWidths = new int[page.Header.ColumnCount];
+        var columnWidths = new int[header.ColumnCount];
 
-        for (int columnIndex = 0; columnIndex < page.Header.ColumnCount; columnIndex++)
+        for (int columnIndex = 0; columnIndex < header.ColumnCount; columnIndex++)
         {
-            columnWidths[columnIndex] = page.Header[columnIndex].Length;
+            columnWidths[columnIndex] = header[columnIndex].Length;
         }
 
-        for (int rowIndex = 0; rowIndex < page.Rows.RowCount; rowIndex++)
+        for (int rowIndex = 0; rowIndex < rows.RowCount; rowIndex++)
         {
-            CsvRow row = page.Rows[rowIndex];
-            for (int columnIndex = 0; columnIndex < page.Header.ColumnCount; columnIndex++)
+            CsvRow row = rows[rowIndex];
+            for (int columnIndex = 0; columnIndex < header.ColumnCount; columnIndex++)
             {
                 columnWidths[columnIndex] = Math.Max(
                     columnWidths[columnIndex],

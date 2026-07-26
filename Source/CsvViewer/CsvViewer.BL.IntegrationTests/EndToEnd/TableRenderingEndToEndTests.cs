@@ -107,7 +107,8 @@ public class TableRenderingEndToEndTests
         Result<CsvDocument> parseResult = CsvParser.Parse(readResult.Value!);
         Assert.That(parseResult.IsSuccess, Is.True, parseResult.Message);
 
-        Result<string> renderResult = new TableRenderer().Render(parseResult.Value!);
+        Result<string> renderResult = new TableRenderer()
+            .Render(parseResult.Value!.Header, parseResult.Value.Rows);
         Assert.That(renderResult.IsSuccess, Is.True, renderResult.Message);
 
         return renderResult.Value!;

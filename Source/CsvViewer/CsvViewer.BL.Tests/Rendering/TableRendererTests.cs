@@ -9,15 +9,15 @@ public class TableRendererTests
     public void Wenn_KursbeispielGerendertWird_dann_AusgabeIstZeichengenau()
     {
         // Arrange
-        CsvDocument page = CreatePage(
-            ["Name", "Age", "City"],
+        CsvHeader header = CreateHeader("Name", "Age", "City");
+        CsvRowCollection rows = CreateRows(
             ["Peter", "42", "New York"],
             ["Paul", "57", "London"],
             ["Mary", "35", "Munich"]);
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page).Value!;
+        string result = renderer.Render(header, rows).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -33,13 +33,12 @@ public class TableRendererTests
     public void Wenn_HeaderLaengerAlsAlleDatenwerteIst_dann_HeaderBestimmtSpaltenbreite()
     {
         // Arrange
-        CsvDocument page = CreatePage(
-            ["LangerHeader", "B"],
-            ["kurz", "x"]);
+        CsvHeader header = CreateHeader("LangerHeader", "B");
+        CsvRowCollection rows = CreateRows(["kurz", "x"]);
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page).Value!;
+        string result = renderer.Render(header, rows).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -53,13 +52,12 @@ public class TableRendererTests
     public void Wenn_DatenwertLaengerAlsHeaderIst_dann_DatenwertBestimmtSpaltenbreite()
     {
         // Arrange
-        CsvDocument page = CreatePage(
-            ["A", "B"],
-            ["laengster", "x"]);
+        CsvHeader header = CreateHeader("A", "B");
+        CsvRowCollection rows = CreateRows(["laengster", "x"]);
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page).Value!;
+        string result = renderer.Render(header, rows).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -73,13 +71,14 @@ public class TableRendererTests
     public void Wenn_ZweiSeitenUnterschiedlichLangeWerteHaben_dann_BreitenWerdenJeSeiteBerechnet()
     {
         // Arrange
-        CsvDocument shortPage = CreatePage(["Name"], ["Ada"]);
-        CsvDocument widePage = CreatePage(["Name"], ["Alexandria"]);
+        CsvHeader header = CreateHeader("Name");
+        CsvRowCollection shortRows = CreateRows(["Ada"]);
+        CsvRowCollection wideRows = CreateRows(["Alexandria"]);
         var renderer = new TableRenderer();
 
         // Act
-        string shortResult = renderer.Render(shortPage).Value!;
-        string wideResult = renderer.Render(widePage).Value!;
+        string shortResult = renderer.Render(header, shortRows).Value!;
+        string wideResult = renderer.Render(header, wideRows).Value!;
 
         // Assert
         Assert.That(
@@ -94,11 +93,12 @@ public class TableRendererTests
     public void Wenn_SeiteKeineDatenzeilenHat_dann_NurHeaderUndTrennlinieWerdenGerendert()
     {
         // Arrange
-        CsvDocument page = CreatePage(["Name", "Alter"]);
+        CsvHeader header = CreateHeader("Name", "Alter");
+        CsvRowCollection rows = CreateRows();
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page).Value!;
+        string result = renderer.Render(header, rows).Value!;
 
         // Assert
         Assert.That(
@@ -110,14 +110,14 @@ public class TableRendererTests
     public void Wenn_ZellwertLeerIst_dann_ZelleBestehtAusAuffuellLeerzeichen()
     {
         // Arrange
-        CsvDocument page = CreatePage(
-            ["A", "Laenge"],
+        CsvHeader header = CreateHeader("A", "Laenge");
+        CsvRowCollection rows = CreateRows(
             ["x", ""],
             ["", "Wert"]);
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page).Value!;
+        string result = renderer.Render(header, rows).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -132,11 +132,12 @@ public class TableRendererTests
     public void Wenn_SeiteEineSpalteHat_dann_EineSpalteWirdPositionsbasiertGerendert()
     {
         // Arrange
-        CsvDocument page = CreatePage(["Wert"], ["eins"], ["zwei"]);
+        CsvHeader header = CreateHeader("Wert");
+        CsvRowCollection rows = CreateRows(["eins"], ["zwei"]);
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page).Value!;
+        string result = renderer.Render(header, rows).Value!;
 
         // Assert
         Assert.That(
@@ -148,13 +149,12 @@ public class TableRendererTests
     public void Wenn_SeiteVierSpaltenHat_dann_AlleSpaltenWerdenPositionsbasiertGerendert()
     {
         // Arrange
-        CsvDocument page = CreatePage(
-            ["A", "BB", "C", "DD"],
-            ["1", "2", "333", "4"]);
+        CsvHeader header = CreateHeader("A", "BB", "C", "DD");
+        CsvRowCollection rows = CreateRows(["1", "2", "333", "4"]);
         var renderer = new TableRenderer();
 
         // Act
-        string result = renderer.Render(page).Value!;
+        string result = renderer.Render(header, rows).Value!;
 
         // Assert
         string expected = JoinLines(
@@ -164,13 +164,14 @@ public class TableRendererTests
         Assert.That(result, Is.EqualTo(expected));
     }
 
-    private static CsvDocument CreatePage(
-        string[] header,
-        params string[][] rows)
+    private static CsvHeader CreateHeader(params string[] columnNames)
     {
-        return new CsvDocument(
-            new CsvHeader(header),
-            new CsvRowCollection(rows.Select(fields => new CsvRow(fields))));
+        return new CsvHeader(columnNames);
+    }
+
+    private static CsvRowCollection CreateRows(params string[][] rows)
+    {
+        return new CsvRowCollection(rows.Select(fields => new CsvRow(fields)));
     }
 
     private static string JoinLines(params string[] lines)

@@ -123,13 +123,13 @@ public class ViewerFlowIntegrationTests
             return new Result(false, parseResult.Message);
         }
 
-        Result<CsvPageCollection> pagesResult =
+        Result<PagedDocument> pagedResult =
             Paginator.Paginate(parseResult.Value, argumentsResult.Value.PageSize);
-        if (!pagesResult.IsSuccess)
+        if (!pagedResult.IsSuccess)
         {
-            return new Result(false, pagesResult.Message);
+            return new Result(false, pagedResult.Message);
         }
 
-        return new InteractiveViewer(console, new TableRenderer()).Run(pagesResult.Value);
+        return new InteractiveViewer(console, new TableRenderer()).Run(pagedResult.Value);
     }
 }

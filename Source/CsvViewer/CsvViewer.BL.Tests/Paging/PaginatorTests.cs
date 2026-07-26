@@ -14,17 +14,18 @@ public class PaginatorTests
         int originalRowCount = document.Rows.RowCount;
 
         // Act
-        Result<CsvPageCollection> result = Paginator.Paginate(document, 2);
+        Result<PagedDocument> result = Paginator.Paginate(document, 2);
 
         // Assert
         Assert.That(result.IsSuccess, Is.True, result.Message);
-        Assert.That(result.Value!.PageCount, Is.EqualTo(3));
-        Assert.That(result.Value[0].Rows.RowCount, Is.EqualTo(2));
-        Assert.That(result.Value[1].Rows.RowCount, Is.EqualTo(2));
-        Assert.That(result.Value[2].Rows.RowCount, Is.EqualTo(1));
-        Assert.That(result.Value[0].Rows[0][0], Is.EqualTo("eins"));
-        Assert.That(result.Value[1].Rows[0][0], Is.EqualTo("drei"));
-        Assert.That(result.Value[2].Rows[0][0], Is.EqualTo("fünf"));
+        Assert.That(result.Value!.Header, Is.SameAs(document.Header));
+        Assert.That(result.Value.Pages.PageCount, Is.EqualTo(3));
+        Assert.That(result.Value.Pages[0].RowCount, Is.EqualTo(2));
+        Assert.That(result.Value.Pages[1].RowCount, Is.EqualTo(2));
+        Assert.That(result.Value.Pages[2].RowCount, Is.EqualTo(1));
+        Assert.That(result.Value.Pages[0][0][0], Is.EqualTo("eins"));
+        Assert.That(result.Value.Pages[1][0][0], Is.EqualTo("drei"));
+        Assert.That(result.Value.Pages[2][0][0], Is.EqualTo("fünf"));
         Assert.That(document.Rows.RowCount, Is.EqualTo(originalRowCount));
     }
 
@@ -35,13 +36,13 @@ public class PaginatorTests
         CsvDocument document = CreateDocument();
 
         // Act
-        Result<CsvPageCollection> result = Paginator.Paginate(document, 10);
+        Result<PagedDocument> result = Paginator.Paginate(document, 10);
 
         // Assert
         Assert.That(result.IsSuccess, Is.True, result.Message);
-        Assert.That(result.Value!.PageCount, Is.EqualTo(1));
-        Assert.That(result.Value[0].Header, Is.SameAs(document.Header));
-        Assert.That(result.Value[0].Rows.RowCount, Is.Zero);
+        Assert.That(result.Value!.Header, Is.SameAs(document.Header));
+        Assert.That(result.Value.Pages.PageCount, Is.EqualTo(1));
+        Assert.That(result.Value.Pages[0].RowCount, Is.Zero);
     }
 
     [TestCase(0)]
@@ -53,7 +54,7 @@ public class PaginatorTests
         int originalRowCount = document.Rows.RowCount;
 
         // Act
-        Result<CsvPageCollection> result =
+        Result<PagedDocument> result =
             Paginator.Paginate(document, pageSize);
 
         // Assert
@@ -69,7 +70,7 @@ public class PaginatorTests
         CsvDocument? document = null;
 
         // Act
-        Result<CsvPageCollection> result = Paginator.Paginate(document, 10);
+        Result<PagedDocument> result = Paginator.Paginate(document, 10);
 
         // Assert
         Assert.That(result.IsSuccess, Is.False);

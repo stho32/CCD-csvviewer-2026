@@ -4,14 +4,14 @@ namespace CsvViewer.BL.Paging;
 
 public class CsvPageCollection
 {
-    private readonly CsvDocument[] _pages;
+    private readonly CsvRowCollection[] _pages;
 
-    public CsvPageCollection(IEnumerable<CsvDocument> pages)
+    public CsvPageCollection(IEnumerable<CsvRowCollection> pages)
     {
         _pages = pages.ToArray();
     }
 
-    public CsvDocument this[int index] => _pages[index];
+    public CsvRowCollection this[int index] => _pages[index];
     public int PageCount => _pages.Length;
-    public IEnumerator<CsvDocument> GetEnumerator() => ((IEnumerable<CsvDocument>)_pages).GetEnumerator();
+    public IEnumerator<CsvRowCollection> GetEnumerator() => ((IEnumerable<CsvRowCollection>)_pages).GetEnumerator();
 }
