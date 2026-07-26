@@ -141,6 +141,28 @@ public class InteractiveViewerCliEndToEndTests
         }
     }
 
+    [Test]
+    public async Task Wenn_EingabeOhneExitEndet_dann_ViewerMeldetAbbruch()
+    {
+        // Arrange
+        string path = TemporaryCsv.Write(["Wert", "Erste", "Zweite"]);
+
+        try
+        {
+            // Act — "n" blättert weiter, danach endet die Eingabe ohne E)
+            CliResult result = await RunInteractiveCliAsync([path, "1"], "n");
+
+            // Assert — die Seite wurde noch gezeichnet, der Abbruch aber gemeldet
+            Assert.That(result.ExitCode, Is.Not.Zero);
+            Assert.That(result.CombinedOutput, Does.Contain("Zweite"));
+            Assert.That(result.CombinedOutput, Does.Contain("Die Eingabe endete"));
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
     [TestCaseSource(nameof(InvalidArguments))]
     public async Task Wenn_ArgumenteUngueltigSind_dann_ViewerStartetNicht(
         string[] args,
@@ -239,24 +261,15 @@ public class InteractiveViewerCliEndToEndTests
             "positive Ganzzahl");
     }
 
+    /// <summary>
+    /// Startet den Viewer und schickt die Tastenfolge durch die umgeleitete Eingabe.
+    /// Das braucht kein Pseudo-Terminal und laeuft daher auf jeder Plattform.
+    /// </summary>
     private static async Task<CliResult> RunInteractiveCliAsync(
         string[] args,
         string keys)
     {
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = "/usr/bin/script",
-            RedirectStandardInput = true,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false,
-            WorkingDirectory = Path.GetDirectoryName(ProjectPath)!,
-        };
-        startInfo.ArgumentList.Add("-qefc");
-        startInfo.ArgumentList.Add(BuildShellCommand(args));
-        startInfo.ArgumentList.Add("/dev/null");
-
-        return await RunProcessAsync(startInfo, keys);
+        return await RunProcessAsync(CreateDotnetStartInfo(args), keys);
     }
 
     private static async Task<CliResult> RunNonInteractiveCliAsync(string[] args)
@@ -275,6 +288,12 @@ public class InteractiveViewerCliEndToEndTests
             RedirectStandardError = true,
             UseShellExecute = false,
             WorkingDirectory = Path.GetDirectoryName(ProjectPath)!,
+
+            // Der Viewer schreibt UTF-8. Ohne diese Vorgabe dekodiert der Testprozess die
+            // Ausgabe mit der OEM-Codepage der Konsole und aus "seitengröße" wird
+            // "seitengr├Â├ƒe".
+            StandardOutputEncoding = Encoding.UTF8,
+            StandardErrorEncoding = Encoding.UTF8,
         };
 
         foreach (string argument in BuildDotnetArguments(args))
@@ -283,13 +302,6 @@ public class InteractiveViewerCliEndToEndTests
         }
 
         return startInfo;
-    }
-
-    private static string BuildShellCommand(string[] args)
-    {
-        return string.Join(
-            ' ',
-            BuildDotnetArguments(args).Prepend("dotnet").Select(ShellQuote));
     }
 
     private static IEnumerable<string> BuildDotnetArguments(string[] args)
@@ -356,11 +368,6 @@ public class InteractiveViewerCliEndToEndTests
         }
 
         return count;
-    }
-
-    private static string ShellQuote(string value)
-    {
-        return $"'{value.Replace("'", "'\"'\"'", StringComparison.Ordinal)}'";
     }
 
     private sealed record CliResult(int ExitCode, string StandardOutput, string StandardError)
