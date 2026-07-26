@@ -46,21 +46,25 @@ Jeder Schritt liefert `Result<T>`; beim ersten Fehler bricht `Program` ab und bi
 
 ## Abhaengigkeiten
 
-**Innere Struktur** — vier Komponenten, drei davon weiter zerlegt:
+**Innere Struktur** — fünf Komponenten, zwei davon weiter zerlegt:
 
 | Komponente | Frage, die sie beantwortet |
 |---|---|
+| [Kommandozeilen-Interpretation](A00007-kommandozeilen-interpretation.md) | Was hat der Anwender überhaupt verlangt? |
 | [Dokument-Beschaffung](A00003-dokument-beschaffung.md) | Wie kommt die Datei ins Programm? |
 | [Seiten-Darstellung](A00004-seiten-darstellung.md) | Wie wird daraus ein Bild? |
 | [Bedienung](A00005-bedienung.md) | Wie steuert der Mensch das? |
 | [Komposition](A00006-komposition.md) | Wer steckt alles zusammen? |
 
-Die ersten drei entsprechen den fachlichen Begriffen des Domänenmodells; `Komposition` ist reine Technik ohne fachliche Entsprechung.
+Die Kommandozeilen-Interpretation steht bewusst **vor** der Dokument-Beschaffung statt in ihr: Sie liefert zwei Werte, die in verschiedene Richtungen fliessen — der Dateipfad speist die Dokument-Beschaffung, die Seitengrösse die Seiten-Aufteilung ([R00006](../../Anforderungen/R00006-kommandozeilen-interpretation-trennen.md)).
+
+`Komposition` ist reine Technik ohne fachliche Entsprechung.
 
 **Modell und Ordnerstruktur** — seit [R00005](../../Anforderungen/R00005-ordnerstruktur-nach-architektur.md) tragen die Ordner der Geschäftslogik die englische Entsprechung der Bausteinnamen:
 
 | Baustein | Ordner |
 |---|---|
+| Kommandozeilen-Interpretation | `CommandLineInterpretation/` |
 | Dokument-Beschaffung | `DocumentAcquisition/` |
 | Seiten-Darstellung | `PagePresentation/` |
 | Bedienung | `Interaction/` |

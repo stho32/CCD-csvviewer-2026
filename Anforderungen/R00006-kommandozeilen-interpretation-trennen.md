@@ -2,7 +2,7 @@
 id: R00006
 title: "Kommandozeilen-Interpretation von der Dokument-Beschaffung trennen"
 type: Refactoring
-status: Neu
+status: Erledigt
 created: 2026-07-26
 ---
 
@@ -44,23 +44,23 @@ Given/When/Then-Szenarien: siehe [user-stories/R00006.md](user-stories/R00006.md
 ## Akzeptanzkriterien
 
 ### Struktur
-- [ ] `ArgumentsParser` und `ViewerArguments` liegen in `CommandLineInterpretation/`
-- [ ] `DocumentAcquisition/` enthält ausschliesslich CSV-bezogene Typen
-- [ ] Namespace `CsvViewer.BL.CommandLineInterpretation` entspricht dem Ordner
+- [x] `ArgumentsParser` und `ViewerArguments` liegen in `CommandLineInterpretation/`
+- [x] `DocumentAcquisition/` enthält ausschliesslich CSV-bezogene Typen
+- [x] Namespace `CsvViewer.BL.CommandLineInterpretation` entspricht dem Ordner
 
 ### Modell
-- [ ] Der Baustein A00007 heisst `Kommandozeilen-Interpretation` und hat `eltern: A00002`
-- [ ] A00003 Dokument-Beschaffung hat nur noch die Kinder A00008 und A00009
-- [ ] Die Ordner-Zuordnungstabelle in A00002 ist aktualisiert
+- [x] Der Baustein A00007 heisst `Kommandozeilen-Interpretation` und hat `eltern: A00002`
+- [x] A00003 Dokument-Beschaffung hat nur noch die Kinder A00008 und A00009
+- [x] Die Ordner-Zuordnungstabelle in A00002 ist aktualisiert
 
 ### Verhalten
-- [ ] Keine Signatur, kein Verhalten und keine Ausgabe ändert sich
-- [ ] Alle 92 Tests laufen unverändert durch
-- [ ] Build ohne Warnungen
+- [x] Keine Signatur, kein Verhalten und keine Ausgabe ändert sich
+- [x] Alle 92 Tests laufen unverändert durch
+- [x] Build ohne Warnungen
 
 ## Status
 
-- [ ] Neu
+- [x] Erledigt
 
 ## Abhängigkeiten
 

@@ -17,21 +17,20 @@ domaene: [D00001]
 
 ## Verantwortung
 
-Beschafft aus den Programmargumenten ein geprüftes CSV-Dokument.
+Macht aus einem Dateipfad ein geprüftes CSV-Dokument.
 
 ## Schnittstellen
 
-**Eingehend** — `string[] args` vom Composition Root.
+**Eingehend** — der Dateipfad aus der [Kommandozeilen-Interpretation](A00007-kommandozeilen-interpretation.md).
 
-**Ausgehend** — `Result<ViewerArguments>` und `Result<CsvDocument>`; im Fehlerfall eine Meldung statt eines Dokuments.
+**Ausgehend** — `Result<CsvDocument>`; im Fehlerfall eine Meldung statt eines Dokuments.
 
 ## Abhaengigkeiten
 
-Innere Struktur — drei Schritte in fester Reihenfolge:
+Innere Struktur — zwei Schritte in fester Reihenfolge:
 
-1. [Argument-Eingang](A00007-argument-eingang.md) — Pfad und Seitengröße prüfen
-2. [Datei-Zugriff](A00008-datei-zugriff.md) — Zeilen von der Platte holen
-3. [CSV-Interpretation](A00009-csv-interpretation.md) — Zeilen als Kopfzeile plus Datensätze deuten
+1. [Datei-Zugriff](A00008-datei-zugriff.md) — Zeilen von der Platte holen
+2. [CSV-Interpretation](A00009-csv-interpretation.md) — Zeilen als Kopfzeile plus Datensätze deuten
 
 Extern: Dateisystem (lesend). Weiter gereicht wird das Ergebnis an [Seiten-Darstellung](A00004-seiten-darstellung.md).
 

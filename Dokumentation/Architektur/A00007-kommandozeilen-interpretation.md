@@ -1,19 +1,18 @@
 ---
 id: A00007
-name: Argument-Eingang
+name: Kommandozeilen-Interpretation
 ebene: Komponente
-eltern: A00003
+eltern: A00002
 repo:
 status: Aktiv
 herkunft: code
 quellen:
-  - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/ArgumentsParser.cs
-  - Source/CsvViewer/CsvViewer.BL/DocumentAcquisition/ViewerArguments.cs
+  - Source/CsvViewer/CsvViewer.BL/CommandLineInterpretation/
 verwandt: [A00010]
 domaene: [D00002]
 ---
 
-# Argument-Eingang
+# Kommandozeilen-Interpretation
 
 ## Verantwortung
 
