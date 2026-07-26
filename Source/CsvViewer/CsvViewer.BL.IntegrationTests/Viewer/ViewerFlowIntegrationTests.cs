@@ -1,4 +1,5 @@
 using System.Text;
+using CsvViewer.BL.CommandLineInterpretation;
 using CsvViewer.BL.Common;
 using CsvViewer.BL.DocumentAcquisition;
 using CsvViewer.BL.IntegrationTests.Mocks;

@@ -1,6 +1,6 @@
 using CsvViewer.BL.Common;
 
-namespace CsvViewer.BL.DocumentAcquisition;
+namespace CsvViewer.BL.CommandLineInterpretation;
 
 public static class ArgumentsParser
 {
